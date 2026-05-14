@@ -333,7 +333,12 @@ There is an important caveat to the above operation. Let say the operator attemp
 </ol>
 
 <br />
-The firmware (1) and simulation (2) are found here. The hardware & PCB component (3) are found in the THT or SMD hardware repositories. Both hardware types use the same version of the firmware.
+The firmware and simulation are found here. The hardware & PCB component are found in the THT or SMD hardware repositories. Both hardware types use the same version of the firmware.<br /><br />
+Please see either
+<strong><a href="https://github.com/BlackbirdStandalone/ToothEater-HW-THT" target="_blank">ToothEater-HW-THT</a></strong>
+or
+<strong><a href="https://github.com/BlackbirdStandalone/ToothEater-HW-SMD" target="_blank">ToothEater-HW-SMD</a></strong>
+
 </p>
 </td>
 </tr>
@@ -345,7 +350,7 @@ The firmware (1) and simulation (2) are found here. The hardware & PCB component
     style="display: block; 
            margin-left: auto;
            margin-right: auto;
-           width: 50%;"
+           width: 40%;"
     src="./images/.directoryStructure.png#center">
 </img>
 <p>
@@ -401,12 +406,3 @@ If you have started the simulation correctly, your screen should look something 
 </tr>
 </table>
 
-<br />
-## 3. Hardware - Electronic schematics and PCB design
-<p>
-Please see either
-<strong><a href="https://github.com/BlackbirdStandalone/ToothEater-HW-THT" target="_blank">ToothEater-HW-THT</a></strong>
-or
-<strong><a href="https://github.com/BlackbirdStandalone/ToothEater-HW-SMD" target="_blank">ToothEater-HW-SMD</a></strong>
-
-</p>
