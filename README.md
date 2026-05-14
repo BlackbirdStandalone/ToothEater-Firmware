@@ -325,12 +325,15 @@ There is an important caveat to the above operation. Let say the operator attemp
 <tr>
 <td>
 <p>
-<u>This project is comprised of 3 parts</u>:
+<u>The Tooth Eater project is comprised of 3 parts</u>:
 <ol>
-  <li>Firmware (source code) </li>
-  <li>Simulation </li>
-  <li>Electronic schematics and PCB design</li>
+  <li>Firmware (source code)</li>
+  <li>Simulation</li>
+  <li>Hardware - Electronic schematics and PCB design</li>
 </ol>
+
+<br />
+The firmware (1) and simulation (2) are found here. The hardware & PCB component (3) are found in the THT or SMD hardware repositories. Both hardware types use the same version of the firmware.
 </p>
 </td>
 </tr>
@@ -399,8 +402,11 @@ If you have started the simulation correctly, your screen should look something 
 </table>
 
 <br />
-## 3. PCB Design
+## 3. Hardware - Electronic schematics and PCB design
 <p>
-The PCB was developed using Kicad 6.0.11 under linux.<br />
-<i> Coming soon </i>
+Please see either
+<strong><a href="https://github.com/BlackbirdStandalone/ToothEater-HW-THT" target="_blank">ToothEater-HW-THT</a></strong>
+or
+<strong><a href="https://github.com/BlackbirdStandalone/ToothEater-HW-SMD" target="_blank">ToothEater-HW-SMD</a></strong>
+
 </p>
