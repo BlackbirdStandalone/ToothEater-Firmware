@@ -21,7 +21,8 @@ Various early 2000's Honda CBR models use a 3-spoke cam trigger wheel. Some exam
 <ul>
   <li>Honda Blackbird CBR1100XX</li>
   <li>Honda ST1300</li>
-  <li>Honda CBR600</li>
+  <li>Honda CBR600F4I</li>
+  <li>Honda CBR929</li>
   <li>Honda CBR954</li>
   <li>Honda CBR1000RR</li>
   <li>Honda Aquatrax jet ski</li>
