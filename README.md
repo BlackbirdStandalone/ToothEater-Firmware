@@ -373,6 +373,24 @@ The tooth eater firmware was written in C and developed for the ATMEL atTiny85 m
 The firmware is licenced under GPLv3 and can be found under the 'src'. Official releases are found as .hex files under the 'releases' directory.
 </p>
 
+<p>
+The firmware can be loaded into the atTiny85 using a sparkfun usb programmer or similar.
+</p>
+
+<table border="1">
+<tr>
+<td align="center" valign="center">
+<img 
+    style="display: block; 
+           margin-left: auto;
+           margin-right: auto;
+           width: 100%;"
+    src="./images/SparkFun.jpg#center">
+</img>
+<p style="text-align: center;">The SparkFun atTiny85 USB programmer.</p>
+</table>
+
+
 <br />
 
 
