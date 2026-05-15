@@ -211,7 +211,7 @@ Finally, the output produced by the tooth eater module. Both the cam and crank s
 <br />
 
 <p>
-The following settings are RusEFI specific. Once in Tuner Studio, we configure the ECU for 12T crank (zero missing teeth) and 1T cam. For Speeduino, 'Dual Wheel' would need to be selected and configured in a similar manner.
+The following settings are RusEFI specific. Once in Tuner Studio, we configure the ECU for 12T crank (zero missing teeth) and 1T cam. For Speeduino, 'Dual Wheel' would need to be selected and configured in a similar manner. You will need to establish the trigger advance angle manually using a timing light.
 </p>
 
 <table border="1">
@@ -248,7 +248,7 @@ The output we expect from the high speed logger interface in Tuner Studio is sho
 The tooth eater module depends on incoming crank and cam pulses to function with the cam pulse being of primary importance. The orientation of the camshaft immediately prior to starting the engine will be in a random position. Once cranking begins the tooth eater must attempt to gather all positional information as quickly and efficiently as possible in order to locate the reference cam tooth and send it on as a SYNC signal to the stand alone ECU. This is in the interests of quick engine starting.<br />
 </p>
 <p>
-The way it achieves this is via two interrupt service routines (ISR's) coupled with the use of a simple state machine. Both the crank and cam each have their own ISR and fire their respective ISR's as each pulse arrives. When the engine is started, the first action that takes place is at the arrival of the first crank pulse which starts the state machine. The arrival of the first cam pulse that follows begins the 'search' process which involves searching for a pattern of 12 consecutive crank pulses without interruption by a cam pulse. Once this pattern is found then the following cam pulse becomes the SYNC pulse (I.e. The 'First Paired' as mentioned above).<br />
+The way it achieves this is via two interrupt service routines (ISR's) coupled with the use of a simple state machine. Both the crank and cam each have their own ISR and fire their respective ISR's as each pulse arrives. When the engine is cranked with the starter button, the first action that takes place is at the arrival of the first crank pulse which starts the state machine. The arrival of the first cam pulse that follows begins the 'search' process which involves searching for a pattern of 12 consecutive crank pulses without interruption by a cam pulse. The cam pulse that interrupted the sequence of 12 crank pulses is a 'pre-marker' cam pulse. The following cam pulse becomes the SYNC pulse (I.e. The 'First Paired' as mentioned above).<br />
 </p>
 
 <table border="1">
@@ -266,7 +266,7 @@ The way it achieves this is via two interrupt service routines (ISR's) coupled w
 
 
 <p>
-To facilitate this development, a simulated environment was developed under Simulide. The simulator was used to generate a digital representation of the crank and cam signals. In addition, the simulator was also able to directly execute the atTiny85 firmware.  The image shown below illustrates the following:
+To facilitate this development, a simulated environment was developed under SimulIde. The simulator was used to generate a digital representation of both crank and cam signals. In addition, the simulator was also able to directly execute the ATtiny85 firmware via loadable hex files.  The image shown below illustrates the following:
 </p>
 
 <table border="1">
@@ -300,14 +300,14 @@ Continuing, the following image highlights various markers in the signals.
 
 <ol>
   <li>CH1 - The stream of crank pulses produced in the simulator. The highlighted section in orange displays the 'group of 12' consecutive pulses in sequence without a cam pulse interruption. The firmware receives this crank pulse stream as an input to its crank ISR.</li>
-  <li>CH2 - The stream of simulated cam pulses in the simulator. This is the 3 spoke pattern with the pulses in their relative proportional spacing. The highlighted red pulses are the SYNC pulses (once in SYNC) and is also the 'First Paired' tooth. The purple highlighted pulse is the cam pulse that immediately succeeds the 'group of 12' crank pulses. This becomes a marker pulse to prepare the following cam pulse to become the SYNC pulse. The firmware receives this cam pulse stream as an input to its cam ISR.</li>
+  <li>CH2 - The stream of simulated cam pulses in the simulator. This is the 3 spoke pattern with the pulses in their relative proportional spacing. I.e. 180, 150 and 30 camshaft degrees. The highlighted red pulses are the SYNC pulses (once in SYNC) and is also the 'First Paired' tooth. The purple highlighted pulse is the cam pulse that interrupts the 'group of 12' crank pulses. This becomes a 'pre-marker' pulse to prepare the following cam pulse to become the SYNC pulse. The firmware receives this cam pulse stream as an input to its cam ISR.</li>
   <li>CH3 - Simply an output test line used to illuminate a LED for diagnostics.</li>
   <li>CH4 - The cam pulse output as a positive edge which is the cam SYNC pulse. This is highlighted in green and aligned to the 'First Paired' tooth. This cam pulse is produced by the tooth eater firmware and is what the downstream ECU 'sees' as a single cam pulse every engine cycle.</li>
-  <li>CH5 - The crank 'enable' line. Once the state machine is SYNCED the crank pulses are allowed to simply 'pass-through' to the stand alone ECU. The firmware simply acts as a switch to allow the crank pulses to flow through once SYNCED.</li>
+  <li>CH5 - The crank 'enable' line. Once the state machine is SYNCED the crank pulses are allowed to simply 'pass-through' to the stand alone ECU. The crank enable line simply acts as a switch to allow the crank pulses to flow through once SYNCED.</li>
 </ol> 
 
 <p>
-Once SYNCED, tooth eater acts as a simple counter and simply deletes the unwanted teeth in very simplistic terms. There is no run-time checking for skipped teeth. This is very important to note since if a tooth skip was to occur the ECU would SYNC at the wrong time as the engine is running and would misfire the engine. It is therefore <i><b>very important to configure the ECU</b></i> such that the cam SYNC is only required at engine startup so that it does not depend on the tooth eater once the engine has been started. Most ECU systems should be capable of managing the cam SYNC internally once the engine has been started. I can speak for RusEFI, having started the bike up and physically disconnected the cam wire from the tooth eater to RusEFU and it did not affect the running of the engine. This is due to RusEFI managing its own cam SYNC internally once the engine has been started.<br />
+Once SYNCED, the tooth eater acts as a simple counter and simply deletes the unwanted teeth in very simplistic terms. There is no run-time checking for skipped teeth. This is very important to note since if a tooth skip was to occur the ECU would SYNC at the wrong time as the engine is running and would misfire the engine. It is therefore <i><b>very important to configure the ECU</b></i> such that the cam SYNC is only required at engine startup so that it does not depend on the tooth eater once the engine has been started. Most ECU systems should be capable of managing the cam SYNC internally once the engine has been started. I can speak for RusEFI, having started the bike up and physically disconnected the cam wire from the tooth eater to RusEFU and it did not affect the running of the engine. This is due to RusEFI managing its own cam SYNC internally once the engine has been started.<br />
 </p>
 
 <p>
@@ -366,19 +366,68 @@ Directory structure of the Tooth Eater project
 
 ## 1. Firmware
 <p>
-The tooth eater firmware was written in C and developed for the ATMEL atTiny85 microcontroller using avr-gcc version 5.4.0 under linux. This small micro controller is more than adequate for the task, using less than 7% of its flash for program code storage and less than 1% of its ram. Upon startup, its internal clocking is set to 8Mhz along with peripheral setup. On power-up, it will simply wait for crank and cam pulse events to arrive to motion the state machine, finally starting the engine.
+The tooth eater firmware was written in C and developed for the ATMEL (now Microchip) ATtiny85 microcontroller using avr-gcc version 5.4.0 under linux. This small micro controller is more than adequate for the task, using less than 7% of its flash for program code storage and less than 1% of its ram. Upon startup, its internal clocking is set to 8Mhz along with peripheral setup. On power-up, it will simply wait for crank and cam pulse events to arrive to motion the state machine, finally starting the engine.
 </p>
 
 <p>
-The firmware is licenced under GPLv3 and can be found under the 'src'. Official releases are found as .hex files under the 'releases' directory.
+The firmware is licenced under GPLv3 and can be found under the 'src'.
 </p>
+
+<p> Assuming the avr cross-compiler toolchain is installed on your machine, building from source is straightforward by simply typing 'make' from within the 'src' directory. Official pre-compiled releases can be found as .hex files under the 'releases' directory.
+</p>
+
+<p>
+The firmware can be loaded into the ATtiny85 using a sparkfun usb programmer or similar.
+</p>
+
+<table border="1">
+
+<tr> 
+<td width="30%">
+<strong><u>Current Firmware Version</u></strong>
+</td>
+<td width="30%">
+<strong><u>Date</u></strong>
+</td>
+<td width="40%">
+<strong><u>Author</u></strong>
+</td>
+</tr>
+
+<tr>
+<td width="30%">
+v1.1
+</td>
+<td width="30%">
+June 2026
+</td>
+<td width="40%">
+Alex Kiaos
+</td>
+</tr>
+
+</table>
+
+<table border="1">
+<tr>
+<td align="center" valign="center">
+<img 
+    style="display: block; 
+           margin-left: auto;
+           margin-right: auto;
+           width: 100%;"
+    src="./images/SparkFun.jpg#center">
+</img>
+<p style="text-align: center;">The SparkFun ATtiny85 USB programmer.</p>
+</table>
+
 
 <br />
 
 
 ## 2. Simulation
 <p>
-The SimulIDE application (v1.1.0) was used to simulate both the crank and cam patterns as well as the atTiny85 firmware. This is a great tool in verifying correct operation before moving onto the hardware. The simulation file can be found under the 'simulation' directory. When this file is loaded into simulide, the firmware must also be loaded into the atTiny85 within the simulator.
+The SimulIDE application (v1.1.0) was used to simulate both the crank and cam patterns as well as the ATtiny85 firmware. This is a great tool in verifying correct operation before moving onto the hardware. The simulation file can be found under the 'simulation' directory. When this file is loaded into simulide, the firmware must also be loaded into the ATtiny85 within the simulator.
 </p>
 
 <table border="1">
@@ -393,7 +442,7 @@ The SimulIDE application (v1.1.0) was used to simulate both the crank and cam pa
 </img>
 <p style="text-align: left;">Tooth Eater in a simulated environment (SimulIDE). 
 The section in red on the left is crank and cam signal generator and is driven by the clock as seen at the very left. The section on the right is the Tooth Eater taking in the signals from the generator and processing them. The simulated visual outputs are show in the scope and on the leds.<br /><br />
-<u>Note</u>: In order for the simulator to work, the firmware 'hex' file must first be loaded into the virtual atTiny85 within the simulator by right clicking the processor and selecting 'Load Firmware', then selecting the .hex file. The firmware can be found under the 'Releases' directory. To start the simulation, click on the red power button at the top of the screen.<br />
+<u>Note</u>: In order for the simulator to work, the firmware 'hex' file must first be loaded into the virtual ATtiny85 within the simulator by right clicking the processor and selecting 'Load Firmware', then selecting the .hex file. The firmware can be found under the 'Releases' directory. To start the simulation, click on the red power button at the top of the screen.<br />
 <br />
 If you have started the simulation correctly, your screen should look something like this.
 <img 

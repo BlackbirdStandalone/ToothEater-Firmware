@@ -1,5 +1,5 @@
 /* -------------------------------------------------------------------------- */
-/* Tooth Eater Firmware: v1.0                                                 */
+/* Tooth Eater Firmware: v1.1                                                 */
 /*                                                                            */
 /* Copyright © 2026 Alex Kiaos                                                */
 /*                                                                            */

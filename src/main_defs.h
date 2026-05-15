@@ -1,5 +1,5 @@
 /* -------------------------------------------------------------------------- */
-/* Tooth Eater Firmware: v1.0                                                 */
+/* Tooth Eater Firmware: v1.1                                                 */
 /*                                                                            */
 /* Copyright © 2026 Alex Kiaos                                                */
 /*                                                                            */
@@ -15,6 +15,13 @@
 /* -------------------------------------------------------------------------- */
 /* Global Definitions                                                         */
 /* -------------------------------------------------------------------------- */
+/*                                                                            */
+/* If using the NCV1124 VR chip, then alignment to the 'first paired' tooth   */
+/* works correct when INVERT_CAM_INPUT is defined. This is due to the NCV1124 */
+/* chip inverting its TTL output. In this case, we fire the cam ISR on the    */
+/* falling edge.                                                              */
+#define INVERT_CAM_INPUT
+
 #undef INVERT_CAM_OUTPUT
 
 

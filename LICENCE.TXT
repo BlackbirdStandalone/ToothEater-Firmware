@@ -1,7 +1,11 @@
 The Tooth Eater software/firmware is distributed under the terms of GNU version 3 license
 with the following additional terms:
 
-  (1) This firmware has been produced in good faith free of charge with the intention
+  (1) This firmware is for non-road use only.
+
+  (2) This firmware is for non-aviation use only.
+
+  (3) This firmware has been produced in good faith free of charge with the intention
       that it will be useful to you. In this light, by using this free software and/or hardware,
       you agree that I will not be held liable in any misfortune you may experience from its use.
       This includes (but is not limited to) the following:

@@ -1,5 +1,5 @@
 /* -------------------------------------------------------------------------- */
-/* Tooth Eater Firmware: v1.0                                                 */
+/* Tooth Eater Firmware: v1.1                                                 */
 /*                                                                            */
 /* Copyright © 2026 Alex Kiaos                                                */
 /*                                                                            */
@@ -34,9 +34,10 @@ ISR (PCINT0_vect)
 
 /* Cam ISR                                                                    */
 /*                                                                            */
-/* This interrupt service routine fires on every positive cam edge at all     */
-/* times. The state machine is driven by 'doCamPulse()' and the watchdog is   */
-/* always patted once the first cam pulse has passed.                         */
+/* This interrupt service routine fires on every falling cam edge. This is    */
+/* due to the inverted cam pulse from the NCV1124 VR conditioner chip. The    */
+/* state machine is driven by 'doCamPulse()' and the watchdog is always       */
+/* patted once the first cam pulse has passed.                                */
 /*   If a HARD LOCKUP is invoked, then this ISR is intentionally jammed to    */
 /* invoke the WDG and reset the microcontroller.                              */
 ISR (INT0_vect)
@@ -56,26 +57,29 @@ ISR (INT0_vect)
     }
 }
 
-/* Configure cam ISR pin as rising edge                                       */
-/* Enable the external interrupt line INT0 and configure as rising edge       */
+/* Configure cam ISR pin                                                      */
+/* Enable the external interrupt line INT0                                    */
 static void externalInterrupt(void)
 {
     GIMSK |= (1 << INT0);
 
+#ifdef INVERT_CAM_INPUT
+    /* Fire cam ISR on falling edge                                           */
+    MCUCR &= ~(1 << ISC00);
+#else
+    /* Fire cam ISR on rising edge                                            */
     MCUCR |= (1 << ISC00);
+#endif
+
     MCUCR |= (1 << ISC01);
 }
 
-/* Configure crank ISR pin as rising edge                                     */
+/* Configure crank ISR pin                                                    */
 /* Listen for a bit polarity change on PB1, invoking 'PCINT0_vect' if so      */
 static void pinChangeInterrupt(void)
 {
     GIMSK |= (1 << PCIE);
-
     PCMSK |= (1 << PCINT1);
-
-    MCUCR |= (1 << ISC00);
-    MCUCR |= (1 << ISC01);
 }
 
 /* The AVR clock default is 1Mhz. Enforce 8Mhz operation                      */
@@ -95,11 +99,11 @@ static void setupWatchDog(void)
 
 /* Pin setup:                                                                 */
 /*                                                                            */
-/* INPUTS:  PB2: CAM                                                          */
-/*          PB1: CRANK                                                        */
+/* INPUTS:  PB2: CAM (input ISR trigger)                                      */
+/*          PB1: CRANK (input ISR trigger)                                    */
 /*                                                                            */
-/* OUTPUTS: PB0: CAM                                                          */
-/*          PB4: CRANK enable pass-through                                    */
+/* OUTPUTS: PB0: CAM (processed output to ECU)                                */
+/*          PB4: CRANK enable pass-through (output to ECU)                    */
 /*          PB3: Test line - diagnosis                                        */
 /*                                                                            */
 static void setupPins(void)
