@@ -108,13 +108,13 @@ static void setupWatchDog(void)
 /*                                                                            */
 static void setupPins(void)
 {
-    /* Cam input port on PB2 (ISR). Activate internal pull-up resistor        */
+    /* Cam input port on PB2 (ISR). Hi-Z (deactivated internal pull-up)       */
     DDRB &= ~(1 << CAM_TRIG_IN);
-    PORTB |= (1 << CAM_TRIG_IN);
+    PORTB &= ~(1 << CAM_TRIG_IN);
 
-    /* Crank input port on PB1 (ISR). Activate internal pull-up resistor      */
+    /* Crank input port on PB1 (ISR). Hi-Z (deactivate internal pull-up)      */
     DDRB &= ~(1 << CRANK_TRIG_IN);
-    PORTB |= (1 << CRANK_TRIG_IN);
+    PORTB &= ~(1 << CRANK_TRIG_IN);
 
     /* Setup output ports                                                     */
     DDRB |= (1 << CAM_OUT_ENABLE);
