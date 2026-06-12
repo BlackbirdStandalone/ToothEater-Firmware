@@ -16,12 +16,18 @@
 /* Global Definitions                                                         */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* If using the NCV1124 VR chip, then alignment to the 'first paired' tooth   */
-/* works correct when INVERT_CAM_INPUT is defined. This is due to the NCV1124 */
-/* chip inverting its TTL output. In this case, we fire the cam ISR on the    */
-/* falling edge.                                                              */
+/* Cam ISR polarity.                                                          */
+/* Depending on the output of the VR chip that feeds into this tooth eater,   */
+/* you may want to fire the cam ISR either on the falling or rising edge.     */
+/*   Eg. The NCV1124 VR chip inverts its TTL output. So we can fire the ISR   */
+/* on the falling edge and correctly align to the 'first paired'.             */
 #define INVERT_CAM_INPUT
 
+/* The output TTL side of the VR drives these inputs.                         */
+/* Default is activated. Undefine to deactivate (Hi-Z).                       */
+#define ACTIVATE_INTERNAL_PULLUPS
+
+/* Default is non-inverted output.                                            */
 #undef INVERT_CAM_OUTPUT
 
 

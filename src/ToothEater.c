@@ -108,14 +108,6 @@ static void setupWatchDog(void)
 /*                                                                            */
 static void setupPins(void)
 {
-    /* Cam input port on PB2 (ISR). Hi-Z (deactivated internal pull-up)       */
-    DDRB &= ~(1 << CAM_TRIG_IN);
-    PORTB &= ~(1 << CAM_TRIG_IN);
-
-    /* Crank input port on PB1 (ISR). Hi-Z (deactivate internal pull-up)      */
-    DDRB &= ~(1 << CRANK_TRIG_IN);
-    PORTB &= ~(1 << CRANK_TRIG_IN);
-
     /* Setup output ports                                                     */
     DDRB |= (1 << CAM_OUT_ENABLE);
     DDRB |= (1 << CRANK_OUT_ENABLE);
@@ -125,6 +117,20 @@ static void setupPins(void)
     CAM_OUTPUT_OFF
     CRANK_OUTPUT_OFF
     TEST_LINE_OFF
+
+    /* Cam (PB2) & crank (PB1) input ports for (ISR).                         */
+    DDRB &= ~(1 << CAM_TRIG_IN);
+    DDRB &= ~(1 << CRANK_TRIG_IN);
+
+    /* Default on input pins is Hi-Z. Inputs are driven by the VR chip        */
+#ifdef ACTIVATE_INTERNAL_PULLUPS
+    PORTB |= (1 << CAM_TRIG_IN);
+    PORTB |= (1 << CRANK_TRIG_IN);
+#else
+    PORTB &= ~(1 << CAM_TRIG_IN);
+    PORTB &= ~(1 << CRANK_TRIG_IN);
+#endif
+
 }
 
 /* The entire system is interrupt driven. main() is only used to setup the    */
