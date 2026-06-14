@@ -125,7 +125,6 @@ void doCamPulse(void)
         {
             /* Assert output cam pulse. Allow the 'First paired' to pass      */
             CAM_OUTPUT_ON
-            TEST_LINE_ON
 
             cam.nCamModCount = 3;
         }
@@ -133,7 +132,6 @@ void doCamPulse(void)
         {
             /* De-assert output cam pulse to 'eat' teeth, inhibiting output   */
             CAM_OUTPUT_OFF
-            TEST_LINE_OFF
         }
 
         --cam.nCamModCount;

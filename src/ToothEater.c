@@ -28,32 +28,27 @@ ISR (PCINT0_vect)
     if (PINB & (1 << CRANK_TRIG_IN))
 #endif
     {
+        TEST_LINE_ON
         if (cam.state == SYNCED)
         {
             if (0 == cam.nCrankModCount)
             {
                 CAM_OUTPUT_ON
-                TEST_LINE_ON
 
                 cam.nCrankModCount = CKP_PER_ENGINE_CYCLE;
             }
             else
             {
                 CAM_OUTPUT_OFF
-                TEST_LINE_OFF
             }
 
             --cam.nCrankModCount;
         }
         else if (cam.state == SYNC_DELAY)
         {
-
-            TEST_LINE_ON
-
             if (0 == cam.nDelayCrankAlignmentCount)
             {
                 cam.state = SYNCED;
-                TEST_LINE_OFF
             }
             else
             {
@@ -83,11 +78,6 @@ ISR (PCINT0_vect)
 #endif
     {
         doCrankPulse();
-        TEST_LINE_ON
-    }
-    else
-    {
-        TEST_LINE_OFF
     }
 }
 #endif
@@ -211,6 +201,7 @@ int main(void)
 
     while (!(FLAGS & BIT_HARD_LOCKUP))
     {
+        TEST_LINE_OFF
     }
 }
 
