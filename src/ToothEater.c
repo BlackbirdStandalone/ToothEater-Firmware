@@ -21,7 +21,11 @@
 /* during engine running.                                                     */
 ISR (PCINT0_vect)
 {
+#ifdef INVERT_CRANK_INPUT
+    if (!(PINB & (1 << CRANK_TRIG_IN)))
+#else
     if (PINB & (1 << CRANK_TRIG_IN))
+#endif
     {
         doCrankPulse();
         TEST_LINE_ON

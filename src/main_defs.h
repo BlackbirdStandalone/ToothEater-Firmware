@@ -16,6 +16,9 @@
 /* Global Definitions                                                         */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
+/* Crank ISR polarity.                                                        */
+#undef INVERT_CRANK_INPUT
+
 /* Cam ISR polarity.                                                          */
 /* Depending on the output of the VR chip that feeds into this tooth eater,   */
 /* you may want to fire the cam ISR either on the falling or rising edge.     */
