@@ -25,7 +25,6 @@ typedef volatile unsigned char  vu8;
 #define CAM_PULSE_INSERTION_MODE
 #define CAM_PULSE_FASTER_STARTUP
 
-
 /* Crank ISR polarity.                                                        */
 #undef INVERT_CRANK_INPUT
 
@@ -36,9 +35,10 @@ typedef volatile unsigned char  vu8;
 /* on the falling edge and correctly align to the 'first paired'.             */
 #define INVERT_CAM_INPUT
 
-/* The output TTL side of the VR drives these inputs.                         */
-/* Default is activated. Undefine to deactivate (Hi-Z).                       */
-#define ACTIVATE_INTERNAL_PULLUPS
+/* Define to activate ISR input side pull-ups. Undefine to deactivate (Hi-Z). */
+/* Default is deactivated.                                                    */
+/* Note: The output TTL side of the VR drives these inputs.                   */
+#undef ACTIVATE_INTERNAL_PULLUPS
 
 /* Default is non-inverted output.                                            */
 #undef INVERT_CAM_OUTPUT
@@ -49,7 +49,8 @@ typedef volatile unsigned char  vu8;
 
 /* The number of crank pulses between the fast start SYNC point and the       */
 /* first paired tooth. This is for testing alignment only & not needed in     */
-/* fast start mode.                                                           */
+/* fast start mode. This is more of a test feature and is used when           */
+/* CAM_PULSE_FASTER_STARTUP is undefined.                                     */
 #define DELAY_CRK_ALIGN_COUNT  8
 
 /* -------------------------------------------------------------------------- */
