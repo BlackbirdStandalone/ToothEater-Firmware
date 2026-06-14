@@ -26,7 +26,7 @@
 
 <item itemtype="Resistor" CircId="Resistor-1" mainComp="false" ShowProp="Resistance" Show_id="false" Show_Val="true" Pos="772,516" rotation="0" hflip="1" vflip="1" label="Resistor-1" idLabPos="-16,-24" labelrot="0" valLabPos="-10.9018,4.9328" valLabRot="0" Resistance="100 Ω" />
 
-<item itemtype="MCU" CircId="tiny85-2" mainComp="false" ShowProp="Frequency" Show_id="true" Show_Val="true" Pos="660,484" rotation="0" hflip="1" vflip="1" label="Attiny85" idLabPos="-2.62445,-15.1885" labelrot="0" valLabPos="4.81746,41.7857" valLabRot="0" Frequency="8 MHz" Program="../src/releases/ToothEater_v1.1.hex" Auto_Load="true" saveEepr="false" Logic_Symbol="false" Rst_enabled="true" Ext_Osc="false" Wdt_enabled="true" Clk_Out="false" varList="GIMSK,MCUSR,,MCUCR,MCUCR,PINB,,PLLCSR,TCCR0A,TCCR0B,TCCR1,TCNT0,TCNT1,TIFR,SREG,0x60,0x72,WDTCR,0x72,0x73,272,273,288,289,176,192,PORTB" MainMcu="true" />
+<item itemtype="MCU" CircId="tiny85-2" mainComp="false" ShowProp="Frequency" Show_id="true" Show_Val="true" Pos="660,484" rotation="0" hflip="1" vflip="1" label="Attiny85" idLabPos="-2.62445,-15.1885" labelrot="0" valLabPos="4.81746,41.7857" valLabRot="0" Frequency="8 MHz" Program="../src/ToothEater.hex" Auto_Load="true" saveEepr="false" Logic_Symbol="false" Rst_enabled="true" Ext_Osc="false" Wdt_enabled="true" Clk_Out="false" varList="GIMSK,MCUSR,,MCUCR,MCUCR,PINB,,PLLCSR,TCCR0A,TCCR0B,TCCR1,TCNT0,TCNT1,TIFR,SREG,0x60,0x72,WDTCR,0x72,0x73,272,273,288,289,176,192,PORTB" MainMcu="true" />
 
 <item itemtype="Counter" CircId="Counter-79" mainComp="false" Show_id="true" Show_Val="false" Pos="52,468" rotation="0" hflip="1" vflip="1" label="Counter-79" idLabPos="-40.2057,18.5687" labelrot="0" valLabPos="-16,20" valLabRot="0" Pin_SET="false" Clock_Inverted="false" Reset_Inverted="false" Max_Value="250" Input_High_V="2.5 V" Input_Low_V="2.5 V" Input_Imped="1000 MΩ" Out_High_V="5 V" Out_Low_V="0 V" Out_Imped="40 Ω" pd_n="0 _Gates" Tpd_ps="0 ns" Tr_ps="0.001 ns" Tf_ps="0.001 ns" />
 
@@ -50,7 +50,7 @@
 
 <item itemtype="Clock" CircId="Clock-98" mainComp="false" ShowProp="Freq" Show_id="false" Show_Val="true" Pos="-244,336" rotation="0" hflip="1" vflip="1" label="Clock-98" idLabPos="-64,-24" labelrot="0" valLabPos="-16,8" valLabRot="0" Out="true" Running="true" Voltage="5 V" Freq="1.5 kHz" Always_On="false" />
 
-<item itemtype="LAnalizer" CircId="LAnalizer-9" mainComp="false" Show_id="false" Show_Val="false" Pos="864,300" rotation="0" hflip="1" vflip="1" label="LAnalizer-9" idLabPos="-90,-100" labelrot="0" valLabPos="-16,20" valLabRot="0" Basic_X="135 _px" Basic_Y="135 _px" BufferSize="100000" connectGnd="true" InputImped="10 MΩ" TimDiv="112053687948" TimPos="-1688511993897" VolDiv="0.15" Tunnels=",,,,,,,," Trigger="3" TimeStep="1000 _ps" AutoExport="false" TresholdR="2.5 V" Bus="false,false,false,false,false,false,false,false," TresholdF="2.5 V" />
+<item itemtype="LAnalizer" CircId="LAnalizer-9" mainComp="false" Show_id="false" Show_Val="false" Pos="864,300" rotation="0" hflip="1" vflip="1" label="LAnalizer-9" idLabPos="-90,-100" labelrot="0" valLabPos="-16,20" valLabRot="0" Basic_X="135 _px" Basic_Y="135 _px" BufferSize="100000" connectGnd="true" InputImped="10 MΩ" TimDiv="133424632531" TimPos="-1626201270738" VolDiv="0.15" Tunnels=",,,,,,,," Trigger="3" TimeStep="1000 _ps" AutoExport="false" TresholdR="2.5 V" Bus="false,false,false,false,false,false,false,false," TresholdF="2.5 V" />
 
 <item itemtype="Resistor" CircId="Resistor-66" mainComp="false" ShowProp="Resistance" Show_id="false" Show_Val="true" Pos="572,372" rotation="-180" hflip="1" vflip="1" label="Resistor-66" idLabPos="-16,-24" labelrot="0" valLabPos="11.9818,-5.13598" valLabRot="180" Resistance="100 Ω" />
 
@@ -60,7 +60,7 @@
 
 <item itemtype="Ground" CircId="Ground-7" mainComp="false" Show_id="false" Show_Val="false" Pos="868,548" rotation="0" hflip="1" vflip="1" label="Ground-7" idLabPos="-16,8" labelrot="0" valLabPos="-16,20" valLabRot="0" />
 
-<item itemtype="TextComponent" CircId="TextComponent-141" mainComp="false" Show_id="false" Show_Val="false" Pos="236,28" rotation="0" hflip="1" vflip="1" label="TextComponent-141" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Margin="5 _px" Border="1 _px" Color="#ffffdc" Opacity="1" Font="Helvetica [Cronyx]" Font_Color="#000080" Font_Size="10 _px" Fixed_Width="false" Text="Valid workable range for Tooth-Eater is:&#xa;&#xa;231 RPMs &#x3D 1.155 Khz&#xa;26000 RPMS &#x3D 130 Khz (in simulator)&#xa;&#xa;Note: 231 RPMS is the minimum RPMS required for reliable SYNC on start-up.&#xa;&#xa;1 cam revolution is generally required to obtain SYNC (2 cam revolutions worst case). I.e. 2 to 4 crank revolutions.&#xa;&#xa;The crank stream is released 1 cam pulse prior to releasing the cam SYNC to the downstream to the ECU.&#xa;The ECU will then obtain its own sync from the tooth eater signal through subsequent crank revolutions prior to starting the engine." />
+<item itemtype="TextComponent" CircId="TextComponent-141" mainComp="false" Show_id="false" Show_Val="false" Pos="212,24" rotation="0" hflip="1" vflip="1" label="TextComponent-141" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Margin="5 _px" Border="1 _px" Color="#ffffdc" Opacity="1" Font="Helvetica [Cronyx]" Font_Color="#000080" Font_Size="10 _px" Fixed_Width="false" Text="Valid workable range for Tooth-Eater is:&#xa;&#xa;231 RPMs &#x3D 1.155 Khz&#xa;26000 RPMS &#x3D 130 Khz (in simulator)&#xa;&#xa;Note: 231 RPMS is the minimum RPMS required for reliable SYNC on start-up.&#xa;&#xa;1 cam revolution is generally required to obtain SYNC (2 cam revolutions worst case). I.e. 2 to 4 crank revolutions.&#xa;&#xa;The crank stream is released 1 cam pulse prior to releasing the cam SYNC to the downstream to the ECU.&#xa;The ECU will then obtain its own sync from the tooth eater signal through subsequent crank revolutions prior to starting the engine." />
 
 <item itemtype="Counter" CircId="Counter-154" mainComp="false" ShowProp="Max_Value" Show_id="true" Show_Val="true" Pos="-64,236" rotation="0" hflip="1" vflip="1" label="CrankOut" idLabPos="-17.5495,-24.0375" labelrot="0" valLabPos="-2.6451,19.1653" valLabRot="0" Pin_SET="false" Clock_Inverted="false" Reset_Inverted="false" Max_Value="24" Input_High_V="2.5 V" Input_Low_V="2.5 V" Input_Imped="1000 MΩ" Out_High_V="5 V" Out_Low_V="0 V" Out_Imped="40 Ω" pd_n="0 _Gates" Tpd_ps="0 ns" Tr_ps="0.001 ns" Tf_ps="0.001 ns" />
 
@@ -82,8 +82,6 @@
 
 <item itemtype="Node" CircId="Node-104" mainComp="false" Pos="-152,336" />
 
-<item itemtype="Node" CircId="Node-137" mainComp="false" Pos="620,372" />
-
 <item itemtype="Node" CircId="Node-155" mainComp="false" Pos="-216,336" />
 
 <item itemtype="Node" CircId="Node-159" mainComp="false" Pos="628,508" />
@@ -93,6 +91,8 @@
 <item itemtype="Node" CircId="Node-161" mainComp="false" Pos="760,452" />
 
 <item itemtype="Node" CircId="Node-162" mainComp="false" Pos="712,236" />
+
+<item itemtype="Node" CircId="Node-169" mainComp="false" Pos="620,372" />
 
 <item itemtype="Connector" uid="Connector-223" startpinid="Counter-71-out0" endpinid="FlipFlopRS-84-in0" pointList="108,412,140,412" />
 
@@ -117,8 +117,6 @@
 <item itemtype="Connector" uid="Connector-361" startpinid="FlipFlopRS-84-out0" endpinid="Counter-70-in0" pointList="180,412,204,412" />
 
 <item itemtype="Connector" uid="Connector-396" startpinid="Node-110-2" endpinid="Xor Gate-89-in0" pointList="264,412,360,412,360,428,372,428" />
-
-<item itemtype="Connector" uid="Connector-495" startpinid="Node-137-2" endpinid="tiny85-2-PORTB3" pointList="620,372,620,500,652,500" />
 
 <item itemtype="Connector" uid="Connector-447" startpinid="Node-124-1" endpinid="Node-125-1" pointList="-184,380,-224,380" />
 
@@ -154,8 +152,6 @@
 
 <item itemtype="Connector" uid="connector-46" startpinid="Node-22-2" endpinid="Ground-7-Gnd" pointList="868,516,868,532" />
 
-<item itemtype="Connector" uid="Connector-494" startpinid="Resistor-66-lPin" endpinid="Node-137-0" pointList="588,372,620,372" />
-
 <item itemtype="Connector" uid="Connector-189" startpinid="Led-55-lPin" endpinid="Resistor-66-rPin" pointList="544,372,556,372" />
 
 <item itemtype="Connector" uid="Connector-498" startpinid="Node-138-2" endpinid="tiny85-2-PORTB0" pointList="720,516,700,516" />
@@ -168,10 +164,6 @@
 
 <item itemtype="Connector" uid="Connector-474" startpinid="Node-133-1" endpinid="tiny85-2-PORTB5" pointList="656,648,692,648,692,568,640,568,640,492,652,492" />
 
-<item itemtype="Connector" uid="Connector-527" startpinid="Node-138-1" endpinid="LAnalizer-9-Pin3" pointList="720,516,720,284,776,284" />
-
-<item itemtype="Connector" uid="Connector-531" startpinid="Node-137-1" endpinid="LAnalizer-9-Pin2" pointList="620,372,620,268,776,268" />
-
 <item itemtype="Connector" uid="Connector-546" startpinid="Node-104-1" endpinid="Or Gate-94-in0" pointList="-152,336,408,336,408,424" />
 
 <item itemtype="Connector" uid="Connector-550" startpinid="And Gate-69-in1" endpinid="FlipFlopRS-95-out0" pointList="-4,388,-28,388,-28,396,-56,396" />
@@ -183,8 +175,6 @@
 <item itemtype="Connector" uid="Connector-553" startpinid="Node-155-2" endpinid="Counter-88-in0" pointList="-216,336,-208,336" />
 
 <item itemtype="Connector" uid="Connector-567" startpinid="Node-159-1" endpinid="tiny85-2-PORTB4" pointList="628,508,652,508" />
-
-<item itemtype="Connector" uid="Connector-568" startpinid="LAnalizer-9-Pin4" endpinid="Node-159-0" pointList="776,300,628,300,628,508" />
 
 <item itemtype="Connector" uid="Connector-569" startpinid="Node-159-2" endpinid="Resistor-37-lPin" pointList="628,508,604,508,604,532,596,532" />
 
@@ -205,5 +195,15 @@
 <item itemtype="Connector" uid="Connector-586" startpinid="Or Gate-94-out" endpinid="Buffer-163-in0" pointList="440,428,448,428" />
 
 <item itemtype="Connector" uid="Connector-587" startpinid="Buffer-163-out" endpinid="Node-160-0" pointList="480,428,700,428,700,424" />
+
+<item itemtype="Connector" uid="Connector-568" startpinid="LAnalizer-9-Pin4" endpinid="Node-159-0" pointList="776,300,628,300,628,508" />
+
+<item itemtype="Connector" uid="Connector-606" startpinid="Node-138-1" endpinid="LAnalizer-9-Pin2" pointList="720,516,720,268,776,268" />
+
+<item itemtype="Connector" uid="Connector-607" startpinid="LAnalizer-9-Pin3" endpinid="Node-169-1" pointList="776,284,620,284,620,372" />
+
+<item itemtype="Connector" uid="Connector-608" startpinid="Resistor-66-lPin" endpinid="Node-169-0" pointList="588,372,620,372" />
+
+<item itemtype="Connector" uid="Connector-609" startpinid="Node-169-2" endpinid="tiny85-2-PORTB3" pointList="620,372,620,500,652,500" />
 
 </circuit>

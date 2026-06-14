@@ -10,12 +10,22 @@
 #ifndef MAIN_DEFS_H
 #define MAIN_DEFS_H
 
-#include "main_types.h"
+typedef volatile unsigned short vu16;
+typedef volatile unsigned char  vu8;
 
 /* -------------------------------------------------------------------------- */
 /* Global Definitions                                                         */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
+
+/* Crank pulses are direct pass-through from VR to ECU.                       */
+/* Cam pulses are used from the VR to initially SYNC, then are ignored by the */
+/* VR. The Tooth eater will insert its own cam pulse digitally on every 24th  */
+/* crank pulse. The width of the inserted cam pulse is 1 crank pulse period.  */
+#define CAM_PULSE_INSERTION_MODE
+#define CAM_PULSE_FASTER_STARTUP
+
+
 /* Crank ISR polarity.                                                        */
 #undef INVERT_CRANK_INPUT
 
@@ -33,6 +43,14 @@
 /* Default is non-inverted output.                                            */
 #undef INVERT_CAM_OUTPUT
 
+/* Number of crank pulses per engine cycle.                                   */
+/* The crank trigger wheel has 12T, so double this.                           */
+#define CKP_PER_ENGINE_CYCLE   24
+
+/* The number of crank pulses between the fast start SYNC point and the       */
+/* first paired tooth. This is for testing alignment only & not needed in     */
+/* fast start mode.                                                           */
+#define DELAY_CRK_ALIGN_COUNT  8
 
 /* -------------------------------------------------------------------------- */
 /* Custom Flag bits (single byte only)                                        */

@@ -19,6 +19,61 @@
 /* disabled by the state machine once it is in the SYNC state. This is to     */
 /* prevent unnecessarily overloading the processor with crank interrupts      */
 /* during engine running.                                                     */
+#ifdef CAM_PULSE_INSERTION_MODE
+ISR (PCINT0_vect)
+{
+#ifdef INVERT_CRANK_INPUT
+    if (!(PINB & (1 << CRANK_TRIG_IN)))
+#else
+    if (PINB & (1 << CRANK_TRIG_IN))
+#endif
+    {
+        if (cam.state == SYNCED)
+        {
+            if (0 == cam.nCrankModCount)
+            {
+                CAM_OUTPUT_ON
+                TEST_LINE_ON
+
+                cam.nCrankModCount = CKP_PER_ENGINE_CYCLE;
+            }
+            else
+            {
+                CAM_OUTPUT_OFF
+                TEST_LINE_OFF
+            }
+
+            --cam.nCrankModCount;
+        }
+        else if (cam.state == SYNC_DELAY)
+        {
+
+            TEST_LINE_ON
+
+            if (0 == cam.nDelayCrankAlignmentCount)
+            {
+                cam.state = SYNCED;
+                TEST_LINE_OFF
+            }
+            else
+            {
+                --cam.nDelayCrankAlignmentCount;
+            }
+        }
+        else
+        {
+            doCrankPulse();
+        }
+
+        /* Pat the watch dog, but only if past the 'UNINITIALISED' state,     */
+        /* since the engine is now cranking or running                        */
+        if (cam.state > UNINITIALISED)
+        {
+            WDG_PAT();
+        }
+    }
+}
+#else
 ISR (PCINT0_vect)
 {
 #ifdef INVERT_CRANK_INPUT
@@ -35,6 +90,7 @@ ISR (PCINT0_vect)
         TEST_LINE_OFF
     }
 }
+#endif
 
 /* Cam ISR                                                                    */
 /*                                                                            */

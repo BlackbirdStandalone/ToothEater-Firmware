@@ -10,21 +10,24 @@
 #ifndef BB_CAM_TO_SINGLE_PULSE_H
 #define BB_CAM_TO_SINGLE_PULSE_H
 
-#include "main_types.h"
+#include "main_defs.h"
 
 typedef enum
 {
     UNINITIALISED = 0,
     CRANKING,
     WAIT_FOR_12,
+    SYNC_DELAY,
     SYNCED,
 } CamEnum_t;
 
 typedef struct
 {
     vu8 state;
-    vu8 nModCount;
+    vu8 nCrankModCount;
+    vu8 nCamModCount;
     vu8 nIntervalCrankPulseCount;
+    vu8 nDelayCrankAlignmentCount;
 } Cam_Context_t;
 
 extern Cam_Context_t cam;

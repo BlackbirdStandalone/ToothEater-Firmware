@@ -93,6 +93,16 @@ void doCamPulse(void)
     case WAIT_FOR_12:
         if (12 == cam.nIntervalCrankPulseCount)
         {
+#ifdef CAM_PULSE_INSERTION_MODE
+
+#ifdef CAM_PULSE_FASTER_STARTUP
+            cam.state = SYNCED;
+#else
+            cam.state = SYNC_DELAY;
+#endif
+            /* Disable cam ISR here                                           */
+            GIMSK &= ~(1 << INT0);
+#else
             cam.state = SYNCED;
 
             /* Disable the crank isr here. We don't want the crank isr        */
@@ -100,6 +110,7 @@ void doCamPulse(void)
             /* will unnecessarily overwhelm the micro with crank interrupts.  */
             /* Clearing the pin change interrupt enable flag                  */
             GIMSK &= ~(1 << PCIE);
+#endif
         }
         break;
 
@@ -110,13 +121,13 @@ void doCamPulse(void)
         /* Conditionally activate the CAM output on every mod 3               */
 
         /* Simply count in mod 3 from here on as the engine is running        */
-        if (0 == cam.nModCount)
+        if (0 == cam.nCamModCount)
         {
             /* Assert output cam pulse. Allow the 'First paired' to pass      */
             CAM_OUTPUT_ON
             TEST_LINE_ON
 
-            cam.nModCount = 3;
+            cam.nCamModCount = 3;
         }
         else
         {
@@ -125,7 +136,7 @@ void doCamPulse(void)
             TEST_LINE_OFF
         }
 
-        --cam.nModCount;
+        --cam.nCamModCount;
         break;
 
     default:
@@ -145,8 +156,11 @@ void initCamSinglePulse(void)
     FLAGS = 0x00;
 
     cam.state = UNINITIALISED;
-    cam.nModCount = 0;
+    cam.nCrankModCount = 0;
+    cam.nCamModCount = 0;
     cam.nIntervalCrankPulseCount = 0;
+
+    cam.nDelayCrankAlignmentCount = DELAY_CRK_ALIGN_COUNT;
 }
 
 
