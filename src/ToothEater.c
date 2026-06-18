@@ -31,6 +31,7 @@ ISR (PCINT0_vect)
         TEST_LINE_ON
         if (cam.state == SYNCED)
         {
+            /* --- Cam signal insertion ---                                    */
             if (0 == cam.nCrankModCount)
             {
                 CAM_OUTPUT_ON
@@ -43,6 +44,18 @@ ISR (PCINT0_vect)
             }
 
             --cam.nCrankModCount;
+            /* --- end Cam signal insertion ---                               */
+
+            /* --- Tacho signal insertion ---                                 */
+            if (0 == cam.nTachoModCount)
+            {
+                TACHO_TOGGLE
+
+                cam.nTachoModCount = TACHO_HALF_PERIOD;
+            }
+
+            --cam.nTachoModCount;
+            /* --- end Tacho signal insertion ---                             */
         }
         else if (cam.state == SYNC_DELAY)
         {
@@ -160,12 +173,12 @@ static void setupPins(void)
 {
     /* Setup output ports                                                     */
     DDRB |= (1 << CAM_OUT_ENABLE);
-    DDRB |= (1 << CRANK_OUT_ENABLE);
+    DDRB |= (1 << TACHO_OUT);
     DDRB |= (1 << TEST_LINE_OUT);
 
     /* On start-up, ensure both CAM and CRANK output enable lines are OFF     */
     CAM_OUTPUT_OFF
-    CRANK_OUTPUT_OFF
+    TACHO_OFF
     TEST_LINE_OFF
 
     /* Cam (PB2) & crank (PB1) input ports for (ISR).                         */

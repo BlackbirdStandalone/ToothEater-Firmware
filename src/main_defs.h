@@ -53,6 +53,11 @@ typedef volatile unsigned char  vu8;
 /* CAM_PULSE_FASTER_STARTUP is undefined.                                     */
 #define DELAY_CRK_ALIGN_COUNT  8
 
+/* Tacho output                                                               */
+#define TACHO_CYCLES           (CKP_PER_ENGINE_CYCLE / 4)
+#define TACHO_HALF_PERIOD      (TACHO_CYCLES / 2)
+
+
 /* -------------------------------------------------------------------------- */
 /* Custom Flag bits (single byte only)                                        */
 /* -------------------------------------------------------------------------- */
@@ -93,7 +98,7 @@ typedef volatile unsigned char  vu8;
 
 /* Output pins                                                                */
 #define CAM_OUT_ENABLE         PB0
-#define CRANK_OUT_ENABLE       PB4
+#define TACHO_OUT              PB4
 
 #define TEST_LINE_OUT          PB3
 
@@ -101,8 +106,9 @@ typedef volatile unsigned char  vu8;
 /* -------------------------------------------------------------------------- */
 /* Macros - Outputs                                                           */
 /* -------------------------------------------------------------------------- */
-#define CRANK_OUTPUT_OFF       PORTB &= ~(1 << CRANK_OUT_ENABLE);
-#define CRANK_OUTPUT_ON        PORTB |= (1 << CRANK_OUT_ENABLE);
+#define TACHO_OFF              PORTB &= ~(1 << TACHO_OUT);
+#define TACHO_ON               PORTB |= (1 << TACHO_OUT);
+#define TACHO_TOGGLE           PORTB ^= (1 << TACHO_OUT);
 
 #ifdef INVERT_CAM_OUTPUT
 #define CAM_OUTPUT_OFF         PORTB |= (1 << CAM_OUT_ENABLE);
@@ -142,7 +148,7 @@ typedef volatile unsigned char  vu8;
 /* -------------------------------------------------------------------------- */
 #define HARD_LOCKUP_FAULT \
     CAM_OUTPUT_OFF \
-    CRANK_OUTPUT_OFF \
+    TACHO_OFF \
     TEST_LINE_ON \
     FLAGS |= BIT_HARD_LOCKUP;
 

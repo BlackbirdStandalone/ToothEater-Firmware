@@ -26,6 +26,7 @@ typedef struct
     vu8 state;
     vu8 nCrankModCount;
     vu8 nCamModCount;
+    vu8 nTachoModCount;
     vu8 nIntervalCrankPulseCount;
     vu8 nDelayCrankAlignmentCount;
 } Cam_Context_t;

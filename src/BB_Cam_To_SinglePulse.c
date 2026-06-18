@@ -115,26 +115,6 @@ void doCamPulse(void)
         break;
 
     case SYNCED:
-        /* Activate crank output (pass-through) - ON ALWAYS in the SYNC state */
-        CRANK_OUTPUT_ON
-
-        /* Conditionally activate the CAM output on every mod 3               */
-
-        /* Simply count in mod 3 from here on as the engine is running        */
-        if (0 == cam.nCamModCount)
-        {
-            /* Assert output cam pulse. Allow the 'First paired' to pass      */
-            CAM_OUTPUT_ON
-
-            cam.nCamModCount = 3;
-        }
-        else
-        {
-            /* De-assert output cam pulse to 'eat' teeth, inhibiting output   */
-            CAM_OUTPUT_OFF
-        }
-
-        --cam.nCamModCount;
         break;
 
     default:
@@ -156,6 +136,7 @@ void initCamSinglePulse(void)
     cam.state = UNINITIALISED;
     cam.nCrankModCount = 0;
     cam.nCamModCount = 0;
+    cam.nTachoModCount = 0;
     cam.nIntervalCrankPulseCount = 0;
 
     cam.nDelayCrankAlignmentCount = DELAY_CRK_ALIGN_COUNT;
