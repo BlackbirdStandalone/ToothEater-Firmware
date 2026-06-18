@@ -19,7 +19,6 @@
 /* disabled by the state machine once it is in the SYNC state. This is to     */
 /* prevent unnecessarily overloading the processor with crank interrupts      */
 /* during engine running.                                                     */
-#ifdef CAM_PULSE_INSERTION_MODE
 ISR (PCINT0_vect)
 {
 #ifdef INVERT_CRANK_INPUT
@@ -31,7 +30,7 @@ ISR (PCINT0_vect)
         TEST_LINE_ON
         if (cam.state == SYNCED)
         {
-            /* --- Cam signal insertion ---                                    */
+            /* --- Cam signal insertion ---                                   */
             if (0 == cam.nCrankModCount)
             {
                 CAM_OUTPUT_ON
@@ -81,19 +80,6 @@ ISR (PCINT0_vect)
         }
     }
 }
-#else
-ISR (PCINT0_vect)
-{
-#ifdef INVERT_CRANK_INPUT
-    if (!(PINB & (1 << CRANK_TRIG_IN)))
-#else
-    if (PINB & (1 << CRANK_TRIG_IN))
-#endif
-    {
-        doCrankPulse();
-    }
-}
-#endif
 
 /* Cam ISR                                                                    */
 /*                                                                            */

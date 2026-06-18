@@ -22,7 +22,6 @@ typedef volatile unsigned char  vu8;
 /* Cam pulses are used from the VR to initially SYNC, then are ignored by the */
 /* VR. The Tooth eater will insert its own cam pulse digitally on every 24th  */
 /* crank pulse. The width of the inserted cam pulse is 1 crank pulse period.  */
-#define CAM_PULSE_INSERTION_MODE
 #define CAM_PULSE_FASTER_STARTUP
 
 /* Crank ISR polarity.                                                        */

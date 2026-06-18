@@ -93,8 +93,6 @@ void doCamPulse(void)
     case WAIT_FOR_12:
         if (12 == cam.nIntervalCrankPulseCount)
         {
-#ifdef CAM_PULSE_INSERTION_MODE
-
 #ifdef CAM_PULSE_FASTER_STARTUP
             cam.state = SYNCED;
 #else
@@ -102,15 +100,6 @@ void doCamPulse(void)
 #endif
             /* Disable cam ISR here                                           */
             GIMSK &= ~(1 << INT0);
-#else
-            cam.state = SYNCED;
-
-            /* Disable the crank isr here. We don't want the crank isr        */
-            /* imposing on the micro in the SYNC state from here on since it  */
-            /* will unnecessarily overwhelm the micro with crank interrupts.  */
-            /* Clearing the pin change interrupt enable flag                  */
-            GIMSK &= ~(1 << PCIE);
-#endif
         }
         break;
 
