@@ -27,7 +27,6 @@ ISR (PCINT0_vect)
     if (PINB & (1 << CRANK_TRIG_IN))
 #endif
     {
-        TEST_LINE_ON
         if (cam.state == SYNCED)
         {
             /* --- Cam signal insertion ---                                   */
@@ -153,19 +152,19 @@ static void setupWatchDog(void)
 /*                                                                            */
 /* OUTPUTS: PB0: CAM (processed output to ECU)                                */
 /*          PB4: CRANK enable pass-through (output to ECU)                    */
-/*          PB3: Test line - diagnosis                                        */
+/*          PB3: Tacho output                                                 */
 /*                                                                            */
 static void setupPins(void)
 {
     /* Setup output ports                                                     */
     DDRB |= (1 << CAM_OUT_ENABLE);
+    DDRB |= (1 << CRANK_OUT_ENABLE);
     DDRB |= (1 << TACHO_OUT);
-    DDRB |= (1 << TEST_LINE_OUT);
 
     /* On start-up, ensure both CAM and CRANK output enable lines are OFF     */
     CAM_OUTPUT_OFF
+    CRANK_OUTPUT_OFF
     TACHO_OFF
-    TEST_LINE_OFF
 
     /* Cam (PB2) & crank (PB1) input ports for (ISR).                         */
     DDRB &= ~(1 << CAM_TRIG_IN);
@@ -200,7 +199,6 @@ int main(void)
 
     while (!(FLAGS & BIT_HARD_LOCKUP))
     {
-        TEST_LINE_OFF
     }
 }
 

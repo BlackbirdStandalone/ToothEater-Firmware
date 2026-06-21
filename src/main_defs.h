@@ -37,7 +37,7 @@ typedef volatile unsigned char  vu8;
 /* Define to activate ISR input side pull-ups. Undefine to deactivate (Hi-Z). */
 /* Default is deactivated.                                                    */
 /* Note: The output TTL side of the VR drives these inputs.                   */
-#undef ACTIVATE_INTERNAL_PULLUPS
+#define ACTIVATE_INTERNAL_PULLUPS
 
 /* Default is non-inverted output.                                            */
 #undef INVERT_CAM_OUTPUT
@@ -96,18 +96,16 @@ typedef volatile unsigned char  vu8;
 #define CRANK_TRIG_IN          PB1
 
 /* Output pins                                                                */
+#define CRANK_OUT_ENABLE       PB4
 #define CAM_OUT_ENABLE         PB0
-#define TACHO_OUT              PB4
-
-#define TEST_LINE_OUT          PB3
+#define TACHO_OUT              PB3
 
 
 /* -------------------------------------------------------------------------- */
 /* Macros - Outputs                                                           */
 /* -------------------------------------------------------------------------- */
-#define TACHO_OFF              PORTB &= ~(1 << TACHO_OUT);
-#define TACHO_ON               PORTB |= (1 << TACHO_OUT);
-#define TACHO_TOGGLE           PORTB ^= (1 << TACHO_OUT);
+#define CRANK_OUTPUT_ON        PORTB |= (1 << CRANK_OUT_ENABLE);
+#define CRANK_OUTPUT_OFF       PORTB &= ~(1 << CRANK_OUT_ENABLE);
 
 #ifdef INVERT_CAM_OUTPUT
 #define CAM_OUTPUT_OFF         PORTB |= (1 << CAM_OUT_ENABLE);
@@ -117,10 +115,9 @@ typedef volatile unsigned char  vu8;
 #define CAM_OUTPUT_ON          PORTB |= (1 << CAM_OUT_ENABLE);
 #endif
 
-#define TEST_LINE_ON           PORTB |= (1 << TEST_LINE_OUT);
-#define TEST_LINE_OFF          PORTB &= ~(1 << TEST_LINE_OUT);
-#define TEST_LINE_TOGGLE       PORTB ^= (1 << TEST_LINE_OUT);
-
+#define TACHO_OFF              PORTB &= ~(1 << TACHO_OUT);
+#define TACHO_ON               PORTB |= (1 << TACHO_OUT);
+#define TACHO_TOGGLE           PORTB ^= (1 << TACHO_OUT);
 
 /* -------------------------------------------------------------------------- */
 /* Macros - Watchdog                                                          */
@@ -147,8 +144,8 @@ typedef volatile unsigned char  vu8;
 /* -------------------------------------------------------------------------- */
 #define HARD_LOCKUP_FAULT \
     CAM_OUTPUT_OFF \
+    CRANK_OUTPUT_OFF \
     TACHO_OFF \
-    TEST_LINE_ON \
     FLAGS |= BIT_HARD_LOCKUP;
 
 #endif

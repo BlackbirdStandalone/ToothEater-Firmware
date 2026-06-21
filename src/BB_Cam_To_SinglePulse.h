@@ -16,6 +16,7 @@ typedef enum
 {
     UNINITIALISED = 0,
     CRANKING,
+    WAIT_FOR_2,
     WAIT_FOR_12,
     SYNC_DELAY,
     SYNCED,

@@ -6,7 +6,7 @@
 
 <item itemtype="Counter" CircId="Counter-71" mainComp="false" ShowProp="Max_Value" Show_id="true" Show_Val="true" Pos="84,412" rotation="0" hflip="1" vflip="1" label="Counter-71" idLabPos="-23.8301,26.1394" labelrot="0" valLabPos="-2.6451,19.1653" valLabRot="0" Pin_SET="false" Clock_Inverted="false" Reset_Inverted="false" Max_Value="1" Input_High_V="2.5 V" Input_Low_V="2.5 V" Input_Imped="1000 MΩ" Out_High_V="5 V" Out_Low_V="0 V" Out_Imped="40 Ω" pd_n="1 _Gates" Tpd_ps="1 ns" Tr_ps="0.001 ns" Tf_ps="0.001 ns" />
 
-<item itemtype="Led" CircId="Led-35" mainComp="false" Show_id="true" Show_Val="false" Pos="496,508" rotation="-360" hflip="-1" vflip="1" label="TACHO_OUT" idLabPos="-24.7143,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Color="Yellow" Grounded="false" Threshold="2.4 V" MaxCurrent="0.02 A" Resistance="0.6 Ω" />
+<item itemtype="Led" CircId="Led-35" mainComp="false" Show_id="true" Show_Val="false" Pos="496,508" rotation="-360" hflip="-1" vflip="1" label="CRANK_OUT" idLabPos="-24.7143,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Color="Yellow" Grounded="false" Threshold="2.4 V" MaxCurrent="0.02 A" Resistance="0.6 Ω" />
 
 <item itemtype="Counter" CircId="Counter-88" mainComp="false" ShowProp="Max_Value" Show_id="true" Show_Val="true" Pos="-192,336" rotation="0" hflip="1" vflip="1" label="Counter-88" idLabPos="-19.4505,-34.4932" labelrot="0" valLabPos="-2.6451,19.1653" valLabRot="0" Pin_SET="false" Clock_Inverted="false" Reset_Inverted="false" Max_Value="300" Input_High_V="2.5 V" Input_Low_V="2.5 V" Input_Imped="1000 MΩ" Out_High_V="5 V" Out_Low_V="0 V" Out_Imped="40 Ω" pd_n="0 _Gates" Tpd_ps="0 ns" Tr_ps="0.001 ns" Tf_ps="0.001 ns" />
 
@@ -18,7 +18,7 @@
 
 <item itemtype="Buffer" CircId="Buffer-97" mainComp="false" Show_id="false" Show_Val="false" Pos="332,436" rotation="0" hflip="1" vflip="1" label="Buffer-97" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Input_High_V="2.5 V" Input_Low_V="2.5 V" Input_Imped="1000 MΩ" Invert_Inputs="false" Out_High_V="5 V" Out_Low_V="0 V" Out_Imped="40 Ω" initHigh="false" Inverted="true" Open_Collector="false" Tristate="false" Tpd_ps="10 ns" Tr_ps="3 ns" Tf_ps="4 ns" />
 
-<item itemtype="Led" CircId="Led-55" mainComp="false" Show_id="true" Show_Val="false" Pos="528,372" rotation="-360" hflip="-1" vflip="1" label="TestLine" idLabPos="-17.4524,-24.4841" labelrot="0" valLabPos="-16,20" valLabRot="0" Color="Yellow" Grounded="false" Threshold="2.4 V" MaxCurrent="0.02 A" Resistance="0.6 Ω" />
+<item itemtype="Led" CircId="Led-55" mainComp="false" Show_id="true" Show_Val="false" Pos="528,372" rotation="-360" hflip="-1" vflip="1" label="TACHO_OUT" idLabPos="-17.4524,-24.4841" labelrot="0" valLabPos="-16,20" valLabRot="0" Color="Yellow" Grounded="false" Threshold="2.4 V" MaxCurrent="0.02 A" Resistance="0.6 Ω" />
 
 <item itemtype="And Gate" CircId="And Gate-69" mainComp="false" Show_id="false" Show_Val="false" Pos="12,384" rotation="0" hflip="1" vflip="1" label="And Gate-69" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Input_High_V="2.5 V" Input_Low_V="2.5 V" Input_Imped="1000 MΩ" Num_Inputs="2" Invert_Inputs="false" Out_High_V="5 V" Out_Low_V="0 V" Out_Imped="40 Ω" initHigh="false" Inverted="false" Open_Collector="false" Tpd_ps="0 ns" Tr_ps="0.001 ns" Tf_ps="0.001 ns" />
 
@@ -50,7 +50,7 @@
 
 <item itemtype="Clock" CircId="Clock-98" mainComp="false" ShowProp="Freq" Show_id="false" Show_Val="true" Pos="-244,336" rotation="0" hflip="1" vflip="1" label="Clock-98" idLabPos="-64,-24" labelrot="0" valLabPos="-16,8" valLabRot="0" Out="true" Running="true" Voltage="5 V" Freq="1.5 kHz" Always_On="false" />
 
-<item itemtype="LAnalizer" CircId="LAnalizer-9" mainComp="false" Show_id="false" Show_Val="false" Pos="864,300" rotation="0" hflip="1" vflip="1" label="LAnalizer-9" idLabPos="-90,-100" labelrot="0" valLabPos="-16,20" valLabRot="0" Basic_X="135 _px" Basic_Y="135 _px" BufferSize="100000" connectGnd="true" InputImped="10 MΩ" TimDiv="17234744376" TimPos="-2267063496395" VolDiv="0.15" Tunnels=",,,,,,,," Trigger="2" TimeStep="1000 _ps" AutoExport="false" TresholdR="2.5 V" Bus="false,false,false,false,false,false,false,false," TresholdF="2.5 V" />
+<item itemtype="LAnalizer" CircId="LAnalizer-9" mainComp="false" Show_id="false" Show_Val="false" Pos="864,300" rotation="0" hflip="1" vflip="1" label="LAnalizer-9" idLabPos="-90,-100" labelrot="0" valLabPos="-16,20" valLabRot="0" Basic_X="135 _px" Basic_Y="135 _px" BufferSize="100000" connectGnd="true" InputImped="10 MΩ" TimDiv="178359162432" TimPos="-4392681188127" VolDiv="0.15" Tunnels=",,,,,,,," Trigger="2" TimeStep="1000 _ps" AutoExport="false" TresholdR="2.5 V" Bus="false,false,false,false,false,false,false,false," TresholdF="2.5 V" />
 
 <item itemtype="Resistor" CircId="Resistor-66" mainComp="false" ShowProp="Resistance" Show_id="false" Show_Val="true" Pos="572,372" rotation="-180" hflip="1" vflip="1" label="Resistor-66" idLabPos="-16,-24" labelrot="0" valLabPos="11.9818,-5.13598" valLabRot="180" Resistance="100 Ω" />
 
@@ -70,7 +70,7 @@
 
 <item itemtype="FreqMeter" CircId="FreqMeter-175" mainComp="false" Show_id="false" Show_Val="false" Pos="852,580" rotation="0" hflip="1" vflip="1" label="FreqMeter-175" idLabPos="-32,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Filter="0.1 V" />
 
-<item itemtype="FreqMeter" CircId="FreqMeter-178" mainComp="false" Show_id="false" Show_Val="false" Pos="576,536" rotation="-360" hflip="1" vflip="1" label="FreqMeter-178" idLabPos="-32,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Filter="0.1 V" />
+<item itemtype="FreqMeter" CircId="FreqMeter-178" mainComp="false" Show_id="false" Show_Val="false" Pos="556,404" rotation="-360" hflip="1" vflip="1" label="FreqMeter-178" idLabPos="-32,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Filter="0.1 V" />
 
 <item itemtype="Node" CircId="Node-124" mainComp="false" Pos="-184,380" />
 
@@ -104,7 +104,7 @@
 
 <item itemtype="Node" CircId="Node-176" mainComp="false" Pos="800,516" />
 
-<item itemtype="Node" CircId="Node-179" mainComp="false" Pos="524,508" />
+<item itemtype="Node" CircId="Node-180" mainComp="false" Pos="552,372" />
 
 <item itemtype="Connector" uid="Connector-223" startpinid="Counter-71-out0" endpinid="FlipFlopRS-84-in0" pointList="108,412,140,412" />
 
@@ -159,8 +159,6 @@
 <item itemtype="Connector" uid="Connector-451" startpinid="Node-125-2" endpinid="And Gate-91-in1" pointList="-224,380,-224,400,-144,400" />
 
 <item itemtype="Connector" uid="connector-46" startpinid="Node-22-2" endpinid="Ground-7-Gnd" pointList="868,516,868,532" />
-
-<item itemtype="Connector" uid="Connector-189" startpinid="Led-55-lPin" endpinid="Resistor-66-rPin" pointList="544,372,556,372" />
 
 <item itemtype="Connector" uid="Connector-498" startpinid="Node-138-2" endpinid="tiny85-2-PORTB0" pointList="720,516,700,516" />
 
@@ -224,10 +222,12 @@
 
 <item itemtype="Connector" uid="Connector-619" startpinid="Node-176-2" endpinid="Led-3-lPin" pointList="800,516,808,516" />
 
-<item itemtype="Connector" uid="Connector-620" startpinid="FreqMeter-178-lPin" endpinid="Node-179-1" pointList="536,536,524,536,524,508" />
+<item itemtype="Connector" uid="Connector-623" startpinid="Resistor-37-rPin" endpinid="Led-35-lPin" pointList="548,508,512,508" />
 
-<item itemtype="Connector" uid="Connector-621" startpinid="Resistor-37-rPin" endpinid="Node-179-0" pointList="548,508,524,508" />
+<item itemtype="Connector" uid="Connector-624" startpinid="FreqMeter-178-lPin" endpinid="Node-180-1" pointList="516,404,516,388,552,388,552,372" />
 
-<item itemtype="Connector" uid="Connector-622" startpinid="Node-179-2" endpinid="Led-35-lPin" pointList="524,508,512,508" />
+<item itemtype="Connector" uid="Connector-625" startpinid="Led-55-lPin" endpinid="Node-180-0" pointList="544,372,552,372" />
+
+<item itemtype="Connector" uid="Connector-626" startpinid="Node-180-2" endpinid="Resistor-66-rPin" pointList="552,372,556,372" />
 
 </circuit>

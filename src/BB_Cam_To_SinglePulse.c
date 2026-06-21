@@ -87,7 +87,15 @@ void doCamPulse(void)
 
     case CRANKING:
         ENABLE_WDG
-        cam.state = WAIT_FOR_12;
+        cam.state = WAIT_FOR_2;
+        break;
+
+    case WAIT_FOR_2:
+        if (2 == cam.nIntervalCrankPulseCount)
+        {
+            cam.state = WAIT_FOR_12;
+            CRANK_OUTPUT_ON
+        }
         break;
 
     case WAIT_FOR_12:
