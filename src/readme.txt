@@ -75,9 +75,6 @@ v1.0 - Initial version
 
 Attains sync in a worst case scenario of 2 cam rotations (4 crank rotations).
 
-If using RusEFI, the 'Trigger Advance Angle' is +130 Deg for #1/#4 TDC alignment.
-I.e. Setup -> Trigger in the Tuner Studio menu.
-
 Authenticity .hex file check:
 md5sum ./releases/ToothEater_v1.0.hex 
 39cb44cfd7c7d3e81f36deadc50aef02  ./releases/ToothEater_v1.0.hex
@@ -87,6 +84,5 @@ md5sum ./releases/ToothEater_v1.0.hex
 -----------
 OTHER NOTES
 -----------
-1. What is important is the repeatablity of SYNC on every engine start-up.
-2. I have not tried the MAX9926 VR chip yet.
+1. Only testing with the NCV1124 chip at the moment. I have not tried the MAX9926 VR chip yet.
 

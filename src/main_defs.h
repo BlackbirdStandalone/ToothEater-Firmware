@@ -25,11 +25,11 @@ typedef volatile unsigned char  vu8;
 /* Depending on the output of the VR chip that feeds into this tooth eater,   */
 /* you may want to fire the cam ISR either on the falling or rising edge.     */
 /*   Eg. The NCV1124 VR chip inverts its TTL output. So we can fire the ISR   */
-/* on the falling edge and correctly align to the 'first paired'.             */
+/* on the falling edge.                                                       */
 #define INVERT_CAM_INPUT
 
 /* Define to activate ISR input side pull-ups. Undefine to deactivate (Hi-Z). */
-/* Default is deactivated.                                                    */
+/* Default is Activated.                                                      */
 /* Note: The output TTL side of the VR drives these inputs.                   */
 #define ACTIVATE_INTERNAL_PULLUPS
 
@@ -72,7 +72,7 @@ typedef volatile unsigned char  vu8;
 /* -------------------------------------------------------------------------- */
 
 /* Used i.c.w testing. Stores a vu16 in addresses 0x100 & 0x101               */
-#define FLAGS                 (*(vu8 *)0x0008000A0)
+#define FLAGS                 (*(vu16 *)0x0000000A0)
 
 
 /* -------------------------------------------------------------------------- */
