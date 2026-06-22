@@ -14,11 +14,9 @@
 
 /* Crank ISR                                                                  */
 /*                                                                            */
-/* This interrupt service routine fires on every positive crank edge during   */
-/* engine startup. Once the engine has been started, the interrupt line is    */
-/* disabled by the state machine once it is in the SYNC state. This is to     */
-/* prevent unnecessarily overloading the processor with crank interrupts      */
-/* during engine running.                                                     */
+/* This interrupt service routine fires on every positive crank edge.         */
+/* The watchdog is routinely patted on every crank edge after initial cam     */
+/* SYNC has been made.                                                        */
 ISR (PCINT0_vect)
 {
 #ifdef INVERT_CRANK_INPUT
@@ -27,6 +25,14 @@ ISR (PCINT0_vect)
     if (PINB & (1 << CRANK_TRIG_IN))
 #endif
     {
+#if (0)
+        /* Check for hard lockup condition                                    */
+        if (FLAGS & BIT_HARD_LOCKUP)
+        {
+            while(1) {}
+        }
+#endif
+        /* Process crank edge                                                 */
         if (cam.state == SYNCED)
         {
             /* --- Cam signal insertion ---                                   */
@@ -71,9 +77,9 @@ ISR (PCINT0_vect)
 
 /* Cam ISR                                                                    */
 /*                                                                            */
-/* This interrupt service routine fires on every falling cam edge. This is    */
-/* due to the inverted cam pulse from the NCV1124 VR conditioner chip. The    */
-/* state machine is driven by 'doCamPulse()' and the watchdog is always       */
+/* This interrupt service routine fires on every falling cam edge (default).  */
+/* The NCV1124 VR chip was used during development and its output is inverted.*/
+/* The state machine is driven by 'doCamPulse()' and the watchdog is always   */
 /* patted once the first cam pulse has passed.                                */
 /*   If a HARD LOCKUP is invoked, then this ISR is intentionally jammed to    */
 /* invoke the WDG and reset the microcontroller.                              */

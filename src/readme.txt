@@ -69,14 +69,7 @@ if successful, your output should look something like this:
 VERSION HISTORY
 ---------------
 -------------------------------------------------------------------------------
-v1.1 - Corrected alignment to 'First paired'
-
-If using RusEFI, the 'Trigger Advance Angle' is +190 Deg for #1/#4 TDC alignment.
-I.e. Setup -> Trigger in the Tuner Studio menu.
-
-Authenticity .hex file check:
-md5sum ./releases/ToothEater_v1.1.hex 
-b87d97d2e7928088f92aec5555e7095f  ./releases/ToothEater_v1.1.hex
+v1.1 - <TODO>
 -------------------------------------------------------------------------------
 v1.0 - Initial version
 
@@ -94,13 +87,6 @@ md5sum ./releases/ToothEater_v1.0.hex
 -----------
 OTHER NOTES
 -----------
-1. I have noticed an anomoly with the NCV 1124 chip or perhaps its using it in conjunction with the hardware.
-   It seems to have a quirk that I havn't had time to investigate yet. It starts and runs the bike just fine,
-   however I have noticed that the 3 tooth pattern is inverted when cranking, then becomes non-inverted when
-   the engine is running. This can be observed on the oscilloscope when probing the insertable VR board on
-   pin 3 from the top. I.e. The Cam TTL signal as conditioned by the VR, but not yet processed by the tooth
-   eater.
-     What is important is the repeatablity in starting the bike correctly on the first paired tooth. Once the
-   initial sync has been made, then the ECU will maintain its own internal CAM sync.
-     I have not tried the MAX9926 VR chip yet.
+1. What is important is the repeatablity of SYNC on every engine start-up.
+2. I have not tried the MAX9926 VR chip yet.
 

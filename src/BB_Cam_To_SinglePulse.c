@@ -62,6 +62,14 @@ void doCrankPulse(void)
 /*     the state machine to be restarted in such a scenario by reseting the   */
 /*     micro if the cam pulses cease.                                         */
 /*                                                                            */
+/*   WAIT_FOR_2:                                                              */
+/*     Wait for two consecutive crank pulses to arrive between two cam pulses.*/
+/*     This location in the waveform is between the 'first' and 'second'      */
+/*     paired cam teeth. This is the previous state before 12 consecutive     */
+/*     crank pulses arrive. This state is a preliminary state to 'release'    */
+/*     the crank pulses to the down stream ECU prior to receiving its first   */
+/*     cam pulse (home position).                                             */
+/*                                                                            */
 /*   WAIT_FOR_12:                                                             */
 /*     The number of crank pulses are counted between each cam pulse interval.*/
 /*     The state machine waits until it receives 12 consecutive crank pulses  */
@@ -103,7 +111,7 @@ void doCamPulse(void)
         {
             cam.state = SYNCED;
 
-            /* Disable cam ISR here                                           */
+            /* Disable this cam ISR here. The crank ISR will take over now.   */
             GIMSK &= ~(1 << INT0);
         }
         break;
