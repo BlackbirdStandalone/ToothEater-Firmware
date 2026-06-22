@@ -101,11 +101,8 @@ void doCamPulse(void)
     case WAIT_FOR_12:
         if (12 == cam.nIntervalCrankPulseCount)
         {
-#ifdef CAM_PULSE_FASTER_STARTUP
             cam.state = SYNCED;
-#else
-            cam.state = SYNC_DELAY;
-#endif
+
             /* Disable cam ISR here                                           */
             GIMSK &= ~(1 << INT0);
         }
@@ -135,8 +132,6 @@ void initCamSinglePulse(void)
     cam.nCamModCount = 0;
     cam.nTachoModCount = 0;
     cam.nIntervalCrankPulseCount = 0;
-
-    cam.nDelayCrankAlignmentCount = DELAY_CRK_ALIGN_COUNT;
 }
 
 

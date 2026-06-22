@@ -18,12 +18,6 @@ typedef volatile unsigned char  vu8;
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
 
-/* Crank pulses are direct pass-through from VR to ECU.                       */
-/* Cam pulses are used from the VR to initially SYNC, then are ignored by the */
-/* VR. The Tooth eater will insert its own cam pulse digitally on every 24th  */
-/* crank pulse. The width of the inserted cam pulse is 1 crank pulse period.  */
-#define CAM_PULSE_FASTER_STARTUP
-
 /* Crank ISR polarity.                                                        */
 #undef INVERT_CRANK_INPUT
 
@@ -45,12 +39,6 @@ typedef volatile unsigned char  vu8;
 /* Number of crank pulses per engine cycle.                                   */
 /* The crank trigger wheel has 12T, so double this.                           */
 #define CKP_PER_ENGINE_CYCLE   24
-
-/* The number of crank pulses between the fast start SYNC point and the       */
-/* first paired tooth. This is for testing alignment only & not needed in     */
-/* fast start mode. This is more of a test feature and is used when           */
-/* CAM_PULSE_FASTER_STARTUP is undefined.                                     */
-#define DELAY_CRK_ALIGN_COUNT  8
 
 /* Tacho output                                                               */
 #define TACHO_CYCLES           (CKP_PER_ENGINE_CYCLE / 4)

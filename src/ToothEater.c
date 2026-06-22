@@ -55,17 +55,6 @@ ISR (PCINT0_vect)
             --cam.nTachoModCount;
             /* --- end Tacho signal insertion ---                             */
         }
-        else if (cam.state == SYNC_DELAY)
-        {
-            if (0 == cam.nDelayCrankAlignmentCount)
-            {
-                cam.state = SYNCED;
-            }
-            else
-            {
-                --cam.nDelayCrankAlignmentCount;
-            }
-        }
         else
         {
             doCrankPulse();
@@ -170,7 +159,7 @@ static void setupPins(void)
     DDRB &= ~(1 << CAM_TRIG_IN);
     DDRB &= ~(1 << CRANK_TRIG_IN);
 
-    /* Default on input pins is Hi-Z. Inputs are driven by the VR chip        */
+    /* Default on input pins is IPU. Inputs are driven by the VR chip outputs */
 #ifdef ACTIVATE_INTERNAL_PULLUPS
     PORTB |= (1 << CAM_TRIG_IN);
     PORTB |= (1 << CRANK_TRIG_IN);

@@ -18,7 +18,6 @@ typedef enum
     CRANKING,
     WAIT_FOR_2,
     WAIT_FOR_12,
-    SYNC_DELAY,
     SYNCED,
 } CamEnum_t;
 
@@ -29,7 +28,6 @@ typedef struct
     vu8 nCamModCount;
     vu8 nTachoModCount;
     vu8 nIntervalCrankPulseCount;
-    vu8 nDelayCrankAlignmentCount;
 } Cam_Context_t;
 
 extern Cam_Context_t cam;
