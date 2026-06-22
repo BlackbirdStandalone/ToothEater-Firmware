@@ -50,6 +50,7 @@ ISR (PCINT0_vect)
             --cam.nCrankModCount;
             /* --- end Cam signal insertion ---                               */
 
+#ifdef TACHO_ENABLE
             /* --- Tacho signal insertion ---                                 */
             if (0 == cam.nTachoModCount)
             {
@@ -60,6 +61,10 @@ ISR (PCINT0_vect)
 
             --cam.nTachoModCount;
             /* --- end Tacho signal insertion ---                             */
+#else
+            /* Test line to measure CPU load                                  */
+            TACHO_ON
+#endif
         }
         else
         {
@@ -194,6 +199,9 @@ int main(void)
 
     while (!(FLAGS & BIT_HARD_LOCKUP))
     {
+#ifndef TACHO_ENABLE
+        TACHO_OFF
+#endif
     }
 }
 

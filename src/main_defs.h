@@ -41,6 +41,10 @@ typedef volatile unsigned char  vu8;
 #define CKP_PER_ENGINE_CYCLE   24
 
 /* Tacho output                                                               */
+/* The tacho is enabled by default. If its disabled, the tacho pin serves as  */
+/* a test pin to measure the CPU utilisation load.                            */
+#define TACHO_ENABLE
+
 #define TACHO_CYCLES           (CKP_PER_ENGINE_CYCLE / 4)
 #define TACHO_HALF_PERIOD      (TACHO_CYCLES / 2)
 
