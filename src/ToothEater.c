@@ -185,9 +185,9 @@ static void setupPins(void)
 /* micro on startup. Then loop continuously unless a hard lock up is invoked  */
 int main(void)
 {
-    initCamSinglePulse();
-
     cli();
+
+    initCamSinglePulse();
 
     setupClockRate8Mhz();
     setupWatchDog();
