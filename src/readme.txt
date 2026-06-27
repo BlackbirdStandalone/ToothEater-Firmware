@@ -69,7 +69,12 @@ if successful, your output should look something like this:
 VERSION HISTORY
 ---------------
 -------------------------------------------------------------------------------
-v1.1 - <TODO>
+v1.1 - Improved engine startup times over v1.0 due to improved algorithm.
+     - Added Tacho output feature.
+
+Authenticity .hex file check:
+md5sum ./releases/ToothEater_v1.1.hex 
+1684e1e37aa2abb5f0f6c546ce50ff0b ./releases/ToothEater_v1.1.hex
 -------------------------------------------------------------------------------
 v1.0 - Initial version
 
