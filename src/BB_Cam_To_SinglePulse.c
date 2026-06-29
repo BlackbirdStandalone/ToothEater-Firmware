@@ -42,7 +42,7 @@ void doCrankPulse(void)
 
 /* A single cam pulse invokes this ISR.                                       */
 /*                                                                            */
-/* This routine is called every time a cam pulse arrives where it exectutes   */
+/* This routine is called every time a cam pulse arrives where it executes    */
 /* the state machine once. The general operation of the state machine is as   */
 /* follows:                                                                   */
 /*                                                                            */
