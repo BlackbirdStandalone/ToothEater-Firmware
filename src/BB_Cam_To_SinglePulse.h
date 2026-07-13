@@ -1,5 +1,5 @@
 /* -------------------------------------------------------------------------- */
-/* Tooth Eater Firmware: v1.1                                                 */
+/* Tooth Eater Firmware: v1.2                                                 */
 /*                                                                            */
 /* Copyright © 2026 Alex Kiaos                                                */
 /*                                                                            */
@@ -28,6 +28,7 @@ typedef struct
     vu8 nCamModCount;
     vu8 nTachoModCount;
     vu8 nIntervalCrankPulseCount;
+    vu16 nCamPulseCount;
 } Cam_Context_t;
 
 extern Cam_Context_t cam;

@@ -1,5 +1,5 @@
 /* -------------------------------------------------------------------------- */
-/* Tooth Eater Firmware: v1.1                                                 */
+/* Tooth Eater Firmware: v1.2                                                 */
 /*                                                                            */
 /* Copyright © 2026 Alex Kiaos                                                */
 /*                                                                            */
@@ -17,6 +17,10 @@ typedef volatile unsigned char  vu8;
 /* Global Definitions                                                         */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
+
+/* Strategy selection                                                         */
+#define CAM_PULSES_ON_STARTUP_ONLY
+#define CAM_PULSES_ALLOWED     50
 
 /* Crank ISR polarity.                                                        */
 #undef INVERT_CRANK_INPUT
@@ -50,16 +54,24 @@ typedef volatile unsigned char  vu8;
 
 
 /* -------------------------------------------------------------------------- */
-/* Custom Flag bits (single byte only)                                        */
+/* Custom Flag bits (16-bit)                                                  */
 /* -------------------------------------------------------------------------- */
-#define BIT_0                  (0x01)
-#define BIT_1                  (0x02)
-#define BIT_2                  (0x04)
-#define BIT_3                  (0x08)
-#define BIT_4                  (0x10)
-#define BIT_5                  (0x20)
-#define BIT_6                  (0x40)
-#define BIT_7                  (0x80)
+#define BIT_0                  (0x0001)
+#define BIT_1                  (0x0002)
+#define BIT_2                  (0x0004)
+#define BIT_3                  (0x0008)
+#define BIT_4                  (0x0010)
+#define BIT_5                  (0x0020)
+#define BIT_6                  (0x0040)
+#define BIT_7                  (0x0080)
+#define BIT_8                  (0x0100)
+#define BIT_9                  (0x0200)
+#define BIT_10                 (0x0400)
+#define BIT_11                 (0x0800)
+#define BIT_12                 (0x1000)
+#define BIT_13                 (0x2000)
+#define BIT_14                 (0x4000)
+#define BIT_15                 (0x8000)
 
 #define BIT_SPARE_0            (BIT_0)
 #define BIT_SPARE_1            (BIT_1)
@@ -68,15 +80,23 @@ typedef volatile unsigned char  vu8;
 #define BIT_SPARE_4            (BIT_4)
 #define BIT_SPARE_5            (BIT_5)
 #define BIT_SPARE_6            (BIT_6)
-#define BIT_HARD_LOCKUP        (BIT_7)
+#define BIT_SPARE_7            (BIT_7)
+#define BIT_SPARE_8            (BIT_8)
+#define BIT_SPARE_9            (BIT_9)
+#define BIT_SPARE_10           (BIT_10)
+#define BIT_SPARE_11           (BIT_11)
+#define BIT_SPARE_12           (BIT_12)
+#define BIT_SPARE_13           (BIT_13)
+#define BIT_SPARE_14           (BIT_14)
+#define BIT_HARD_LOCKUP        (BIT_15)
 
 
 /* -------------------------------------------------------------------------- */
 /* Testing/Instrumentation - Debug memory locations                           */
 /* -------------------------------------------------------------------------- */
 
-/* Used i.c.w testing. Stores a vu16 in addresses 0x100 & 0x101               */
-#define FLAGS                 (*(vu16 *)0x0000000A0)
+/* Used i.c.w testing. Stores a vu16 in addresses 0x1A0 & 0x1A1               */
+#define FLAGS                  (*(vu16 *)0x01A0)
 
 
 /* -------------------------------------------------------------------------- */

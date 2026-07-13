@@ -1,5 +1,5 @@
 /* -------------------------------------------------------------------------- */
-/* Tooth Eater Firmware: v1.1                                                 */
+/* Tooth Eater Firmware: v1.2                                                 */
 /*                                                                            */
 /* Copyright © 2026 Alex Kiaos                                                */
 /*                                                                            */
@@ -133,13 +133,14 @@ void doCamPulse(void)
 
 void initCamSinglePulse(void)
 {
-    FLAGS = 0x00;
+    FLAGS = 0x0;
 
     cam.state = UNINITIALISED;
     cam.nCrankModCount = 0;
     cam.nCamModCount = 0;
     cam.nTachoModCount = 0;
     cam.nIntervalCrankPulseCount = 0;
+    cam.nCamPulseCount = 0;
 }
 
 

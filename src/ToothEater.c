@@ -1,5 +1,5 @@
 /* -------------------------------------------------------------------------- */
-/* Tooth Eater Firmware: v1.1                                                 */
+/* Tooth Eater Firmware: v1.2                                                 */
 /*                                                                            */
 /* Copyright © 2026 Alex Kiaos                                                */
 /*                                                                            */
@@ -38,7 +38,19 @@ ISR (PCINT0_vect)
             /* --- Cam signal insertion ---                                   */
             if (0 == cam.nCrankModCount)
             {
+#ifdef CAM_PULSES_ON_STARTUP_ONLY
+                if (cam.nCamPulseCount < CAM_PULSES_ALLOWED)
+                {
+                    CAM_OUTPUT_ON
+                    ++cam.nCamPulseCount;
+                }
+                else
+                {
+                    CAM_OUTPUT_OFF
+                }
+#else
                 CAM_OUTPUT_ON
+#endif
 
                 cam.nCrankModCount = CKP_PER_ENGINE_CYCLE;
             }
