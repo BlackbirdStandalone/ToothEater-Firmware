@@ -1,6 +1,13 @@
 --------
 TO BUILD
 --------
+
+There are 4 build options available depending on what you need.
+
+
+
+
+
 Ensure the avr gnu toolchain is installed and simply 'make' from this 'src' directory.
 
 It will produce 'ToothEater.hex' which can then either be loaded into the simulator or atTiny85 chip.
@@ -9,7 +16,7 @@ It will produce 'ToothEater.hex' which can then either be loaded into the simula
 -----------------
 OFFICIAL RELEASES 
 -----------------
-These releases have been pre-tested to work on the motorcycle against v1.x of the hardware.
+These releases have been pre-tested to work on the motorcycle against v1.1 of the hardware.
 
 See the hex files in the 'release' directory. (Compiled with avr-gcc version 5.4.0)
 

@@ -39,6 +39,74 @@
 # To rebuild project do "make clean" then "make all".
 #----------------------------------------------------------------------------
 
+#----------------------------------------------------------------------------
+#                           STRATEGY SELECTION
+#----------------------------------------------------------------------------
+#
+# Select the functionality you would like from the tooth eater by selecting
+# a strategy.
+#
+# The build options are as follows:
+# 
+# (1) The functionality of the original v1.0 firmware. This build will align the
+#     output cam tooth to the real 'second paired' tooth. There will also be a
+#     continuous stream of single cam pulses as the engine is running. This
+#     option is a real 'Tooth Eat' mode where two cam teeth are deleted as
+#     the engine in running.
+#
+#     To compile this functionality, ensure CDEFS is defined as such:
+#       CDEFS=-DORIGINAL
+#
+# (2) This is the same as option (1), however will only produce cam signals
+#     during the first 'x' number of cam rotation (where 'x' is definably by you).
+#     This option exists in the event that the ECU maintains its own cam
+#     signal internally after the engine has been started. If further cam signals
+#     were to be transmitted into the ECU, the ECU would see the extra cam
+#     pulses as conflicting with its own, causing de-sync due to pulse misalignment.
+#     This may appear in the form of an engine that stutters during acceleration where
+#     the stutter is caused by the de-sync/re-sync conflict. by only transmitting
+#     defined number of cam pulses on cranking and startup, this allows the ECU to
+#     manage its own cam sync internally and not conflict with the tootheater.
+#       
+#     To compile this functionality, ensure CDEFS is defined as such:
+#       CDEFS=-DORIGINAL_CAM_PULSES_ON_STARTUP_ONLY
+#
+# (3) This option is known as 'Cam pulse insertion mode' (CPI). This is not strict 
+#     tooth eating as option (1) implied, but rather a mode where the tooth eater
+#     will insert its own synthesised cam tooth once every 24 crank pulses. This
+#     mode effectively produces the same output as (1) but in a different way.
+#     The cam is still used to gain initial sync, however the real cam pulse is
+#     ignored at this point and replaced by a crank pulse mod 24 operation.
+#     This mode is aligned to the first crank pulse that succeeds the 'isolated'
+#     tooth and finds cam sync a little faster than option (1).
+#
+#     To compile this functionality, ensure CDEFS is defined as such:
+#       CDEFS=-DCPI
+#
+# (4) This option is the same as (3) however only streams 'x' amount of output
+#     cam pulses on startup as described in (2).
+#
+#     To compile this functionality, ensure CDEFS is defined as such:
+#       CDEFS=-DCPI_CAM_PULSES_ON_STARTUP_ONLY
+#
+#
+# Notes:
+#  (a) If using either option (2) or (4), you can modify the number of initial
+#      cam pulses transmitted by the tooth eater on engine start by modifying
+#      the definition 'STARTUP_CAM_PULSES' found at the top of 'main_defs.h'.
+#
+#  (b) The ignition timing on your engine will differ between option (1) and (3).
+#      So you will need to establish your ignition global offset angle for both
+#      build types if you want to experiment with the 'original' and 'cpi' builds.
+#
+#  (c) On my motorcycle running rusefi, option (4) is what I use, but this might
+#      not be the correct choice for you. Option (1) or (3) might be the better
+#      choice to begin with. If you can verify that your ECU maintains its own
+#      cam sync once the engine has been started, then option (2) or (4) might
+#      be worth sticking with to avoid cam pulse conflicts.
+#----------------------------------------------------------------------------
+CDEFS=-DORIGINAL
+
 
 # MCU name
 MCU = attiny85
@@ -126,7 +194,8 @@ CSTANDARD = -std=gnu99
 
 
 # Place -D or -U options here for C sources
-CDEFS = -DF_CPU=$(F_CPU)UL
+
+CDEFS += -DF_CPU=$(F_CPU)UL
 
 
 # Place -D or -U options here for ASM sources

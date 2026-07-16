@@ -16,11 +16,47 @@ typedef volatile unsigned char  vu8;
 /* -------------------------------------------------------------------------- */
 /* Global Definitions                                                         */
 /* -------------------------------------------------------------------------- */
-/*                                                                            */
 
-/* Strategy selection                                                         */
+
+/* -------------------------------------------------------------------------- */
+/* Definition modification based on strategy selection in the makefile.       */
+#if defined(ORIGINAL)
+/* Option (1) in makefile.                                                    */
+
+#define ORIG_MODE
+#undef CPI_MODE
+#undef CAM_PULSES_ON_STARTUP_ONLY
+
+#elif defined(ORIGINAL_CAM_PULSES_ON_STARTUP_ONLY)
+/* Option (2) in makefile.                                                    */
+
+#define ORIG_MODE
+#undef CPI_MODE
+
 #define CAM_PULSES_ON_STARTUP_ONLY
-#define CAM_PULSES_ALLOWED     50
+#define STARTUP_CAM_PULSES     5
+
+#elif defined(CPI)
+/* Option (3) in makefile.                                                    */
+
+#define CPI_MODE
+#undef ORIG_MODE
+#undef CAM_PULSES_ON_STARTUP_ONLY
+
+#elif defined(CPI_CAM_PULSES_ON_STARTUP_ONLY)
+/* Option (4) in makefile.                                                    */
+
+#define CPI_MODE
+#undef ORIG_MODE
+
+#define CAM_PULSES_ON_STARTUP_ONLY
+#define STARTUP_CAM_PULSES     5
+
+#else
+#error "Please select a strategy defined at the top of the makefile"
+#endif
+/* -------------------------------------------------------------------------- */
+
 
 /* Crank ISR polarity.                                                        */
 #undef INVERT_CRANK_INPUT

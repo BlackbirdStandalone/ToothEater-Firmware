@@ -39,7 +39,7 @@ ISR (PCINT0_vect)
             if (0 == cam.nCrankModCount)
             {
 #ifdef CAM_PULSES_ON_STARTUP_ONLY
-                if (cam.nCamPulseCount < CAM_PULSES_ALLOWED)
+                if (cam.nCamPulseCount < STARTUP_CAM_PULSES)
                 {
                     CAM_OUTPUT_ON
                     ++cam.nCamPulseCount;
@@ -190,7 +190,6 @@ static void setupPins(void)
     PORTB &= ~(1 << CAM_TRIG_IN);
     PORTB &= ~(1 << CRANK_TRIG_IN);
 #endif
-
 }
 
 /* The entire system is interrupt driven. main() is only used to setup the    */
