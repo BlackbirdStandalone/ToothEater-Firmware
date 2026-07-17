@@ -42,8 +42,13 @@
 #----------------------------------------------------------------------------
 #                     TOOTH EATER STRATEGY SELECTION
 #----------------------------------------------------------------------------
-# See 'readme.txt' for more information
+# Define only one strategy below from the four presented.
+# See 'readme.txt' for more information.
+
 CDEFS=-DORIGINAL
+#CDEFS=-DORIGINAL_CAM_PULSES_ON_STARTUP_ONLY
+#CDEFS=-DCPI
+#CDEFS=-DCPI_CAM_PULSES_ON_STARTUP_ONLY
 
 
 # MCU name

@@ -39,21 +39,23 @@ They are all described below.
 #     To compile this functionality, ensure CDEFS is defined as such:
 #       CDEFS=-DORIGINAL
 #
+#
 # (2) This is the same as option (1), however will only produce cam signals
-#     during the first 'x' number of cam rotation (where 'x' is defined by you)
-#     when the engine is being cranked or just started.
+#     during the first 'x' number of cam rotations (where 'x' is defined by you)
+#     when the engine is being cranked (upon start-up).
 #       This option exists in the event that the ECU maintains its own cam
 #     signal internally after the engine has been started. If further cam signals
-#     were to be transmitted into the ECU, the ECU would see the extra cam
-#     pulses as conflicting with its own, causing de-sync due to pulse misalignment.
+#     were to be transmitted into the ECU by the tooth eater, the ECU would see the
+#     extra cam pulses as conflicting with its own, causing de-sync due to pulse misalignment.
 #     This may appear in the form of an engine that stutters during acceleration where
-#     the stutter is caused by the de-sync/re-sync conflict. By only transmitting a
-#     defined number of cam pulses on cranking and startup, this allows the ECU to
-#     initially gain the cam SYNC information from the tooth eater, but then
-#     manage its own cam sync internally and not conflict with the tootheater.
+#     the stutter is caused by the de-sync/re-sync conflict between the tooth eater and
+#     the ECU. By only transmitting a defined number of cam pulses on cranking and startup,
+#     this allows the ECU to initially gain the cam SYNC information from the tooth eater,
+#     but then manage its own cam sync internally and not conflict with the tootheater.
 #       
 #     To compile this functionality, ensure CDEFS is defined as such:
 #       CDEFS=-DORIGINAL_CAM_PULSES_ON_STARTUP_ONLY
+#
 #
 # (3) This option is known as 'Cam pulse insertion mode' (CPI). This is not strict 
 #     tooth eating as option (1) implies, but rather a mode where the tooth eater
@@ -61,16 +63,17 @@ They are all described below.
 #     mode effectively produces the same output as (1) but in a different way.
 #     The cam is still used to gain initial sync, however the real cam pulse is
 #     ignored at this point and replaced by a cam pulse that is 'inserted' on every
-#     24'th crank pulse (I.e. crank modulus 24 is 1 cam pulse).
+#     24'th crank pulse (I.e. crank pulse modulus 24 is 1 cam pulse).
 #     This mode is aligned to the first crank pulse that succeeds the 'isolated'
 #     tooth and finds cam sync a little faster than option (1). Another difference
 #     with this strategy compared to (1) is that the tooth eater 'releases' a stream
 #     of crank pulses to the ECU before it releases its first cam pulse. This is
-#     somewhat realistic of what an ECU can expect when trying to sync on engine
-#     startup.
+#     somewhat of a realistic signal of what an ECU can expect when trying to sync
+#     upon engine startup.
 #
 #     To compile this functionality, ensure CDEFS is defined as such:
 #       CDEFS=-DCPI
+#
 #
 # (4) This option is the same as (3) however only streams 'x' amount of output
 #     cam pulses on startup as described in (2).
@@ -93,6 +96,29 @@ They are all described below.
 #      choice to begin with depending on your ECU. If you can verify that your
 #      ECU maintains its own cam sync once the engine has been started, then
 #      option (2) or (4) might be worth sticking with to avoid cam pulse conflicts.
+#        The above options were developed as a result of much experimentation
+#      with rusefi configuration options. I.e. Working out what works and what doesn't.
+#      I found that microRusEfi likes to manage its own cam sync internally once
+#      initially synced by the tooth eater. Conflicts would arise if the tooth eater
+#      continued to stream out its cam pulses to it. So option (4) worked best for me.
+#
+#      So, I use option (4) with microRusEfi with the trigger arrangement as follows:
+#
+#         Trigger Type: '12Crank/24Cam'
+#         Crank Sensor: '45 - VR/Hall Crank'
+#         Primary Edge: 'Rising'
+#         Cam Mode (intake): 'Single Tooth'
+#         Cam Mode (exhaust): 'Inactive'
+#         Cam sensor bank #1 intake: '25 - Hall'
+#         Intake cam edge select: 'Falling'
+#
+#         Trigger Advance angle (deg BTDC): '70'
+#
+#  (d) To date, I have only tested the Tooth eater against microRusEfi as an ECU.
+#      I would like (one day) also have the Blackbird running on speeduino and also
+#      obtain the necessary trigger configuration for it to be able to run the
+#      motorcycle using the tooth eater. I will update this file once this information
+#      comes to light in the future.
 #----------------------------------------------------------------------------
 
 

@@ -95,7 +95,11 @@ void doCamPulse(void)
 
     case CRANKING:
         ENABLE_WDG
+#ifdef CPI_MODE
         cam.state = WAIT_FOR_2;
+#else
+        cam.state = WAIT_FOR_12;
+#endif
         break;
 
     case WAIT_FOR_2:
@@ -111,12 +115,36 @@ void doCamPulse(void)
         {
             cam.state = SYNCED;
 
+#ifdef CPI_MODE
             /* Disable this cam ISR here. The crank ISR will take over now.   */
             GIMSK &= ~(1 << INT0);
+#endif
         }
         break;
 
     case SYNCED:
+#ifdef ORIG_MODE
+        /* Activate crank output (pass-through) - ON ALWAYS in the SYNC state */
+        CRANK_OUTPUT_ON
+
+        /* Conditionally activate the CAM output on every mod 3               */
+
+        /* Simply count in mod 3 from here on as the engine is running        */
+        if (0 == cam.nCamModCount)
+        {
+            /* Assert output cam pulse. Allow the 'First paired' to pass      */
+            CAM_OUTPUT_ON
+
+            cam.nCamModCount = 3;
+        }
+        else
+        {
+            /* De-assert output cam pulse to 'eat' teeth, inhibiting output   */
+            CAM_OUTPUT_OFF
+        }
+
+        --cam.nCamModCount;
+#endif
         break;
 
     default:

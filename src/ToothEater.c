@@ -35,6 +35,7 @@ ISR (PCINT0_vect)
         /* Process crank edge                                                 */
         if (cam.state == SYNCED)
         {
+#ifdef CPI_MODE
             /* --- Cam signal insertion ---                                   */
             if (0 == cam.nCrankModCount)
             {
@@ -61,6 +62,7 @@ ISR (PCINT0_vect)
 
             --cam.nCrankModCount;
             /* --- end Cam signal insertion ---                               */
+#endif
 
 #ifdef TACHO_ENABLE
             /* --- Tacho signal insertion ---                                 */

@@ -53,7 +53,7 @@ typedef volatile unsigned char  vu8;
 #define STARTUP_CAM_PULSES     5
 
 #else
-#error "Please select a strategy defined at the top of the makefile"
+#error "Please select a strategy defined at around line 45 in the makefile"
 #endif
 /* -------------------------------------------------------------------------- */
 
