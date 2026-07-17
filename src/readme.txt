@@ -3,7 +3,7 @@ TO BUILD
 --------
 
 There are 4 build options available depending on what you need to get your bike
-running properly. Select one of the 4 stategies below by defining 'CDEFS' in the
+running properly. Select one of the 4 strategies below by defining 'CDEFS' in the
 makefile with one of the 4 definitions. I.e. 
 
   (1) CDEFS=-DORIGINAL (default)

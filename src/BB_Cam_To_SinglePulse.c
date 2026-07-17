@@ -132,8 +132,20 @@ void doCamPulse(void)
         /* Simply count in mod 3 from here on as the engine is running        */
         if (0 == cam.nCamModCount)
         {
+#ifdef CAM_PULSES_ON_STARTUP_ONLY
+            if (cam.nCamPulseCount < STARTUP_CAM_PULSES)
+            {
+                CAM_OUTPUT_ON
+                ++cam.nCamPulseCount;
+            }
+            else
+            {
+                CAM_OUTPUT_OFF
+            }
+#else
             /* Assert output cam pulse. Allow the 'First paired' to pass      */
             CAM_OUTPUT_ON
+#endif
 
             cam.nCamModCount = 3;
         }
