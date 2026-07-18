@@ -2,6 +2,10 @@
 TO BUILD
 --------
 
+Pre-compiled .hex files are available from v1.0 to v1.2 in the 'releases' sub-directory.
+These can be programmed directly into your ATtiny85.
+
+
 There are 4 build options available depending on what you need to get your bike
 running properly. Select one of the 4 strategies below by defining 'CDEFS' in the
 makefile with one of the 4 definitions. I.e. 
@@ -198,18 +202,10 @@ v1.2 - Adding 4 available build strategies depending on user requirements.
 -------------------------------------------------------------------------------
 v1.1 - Improved engine startup times over v1.0 due to improved algorithm.
      - Added Tacho output feature.
-
-Authenticity .hex file check:
-md5sum ./releases/ToothEater_v1.1.hex 
-1684e1e37aa2abb5f0f6c546ce50ff0b ./releases/ToothEater_v1.1.hex
 -------------------------------------------------------------------------------
 v1.0 - Initial version
 
 Attains sync in a worst case scenario of 2 cam rotations (4 crank rotations).
-
-Authenticity .hex file check:
-md5sum ./releases/ToothEater_v1.0.hex 
-39cb44cfd7c7d3e81f36deadc50aef02  ./releases/ToothEater_v1.0.hex
 -------------------------------------------------------------------------------
 
 
